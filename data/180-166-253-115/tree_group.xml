@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<protocol>
+    <head>
+        <flag>MVP</flag>
+        <version>3</version>
+        <message>1564</message>
+        <session>1</session>
+        <workflow>500065625</workflow>
+        <userid>0</userid>
+    </head>
+    <body>
+        <RetGetCameraGroup>
+            <ret>
+                <iValue>0</iValue>
+                <description></description>
+            </ret>
+            <uiCount>0</uiCount>
+            <array/>
+        </RetGetCameraGroup>
+    </body>
+</protocol>

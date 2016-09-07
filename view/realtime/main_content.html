@@ -1,0 +1,47 @@
+<!-- hbox layout -->
+<div class="hbox bg-light" style="overflow: hidden;"  ng-init="
+  app.settings.asideFolded = true;
+  app.settings.asideFixed = true;
+  app.settings.asideDock = false;
+  app.settings.container = false;
+  app.hideAside = false;
+  " >
+
+  <!-- column -->
+  <div class="col bg-white">
+    <div class="vbox" >
+      <div ng-controller="TabsDemoCtrl">
+        <tabset class="tab-container">
+          <tab ng-repeat="title in ['应用中心']">
+            <tab-heading>
+              <span style="font-size: 20px;font-weight: 900;">{{title}}</span>
+            </tab-heading>
+            <div data-ng-include="'view/mainApp.html'"></div>
+
+            <!-- column -->
+            <!-- /column -->
+          </tab>
+          <tab>
+            <tab-heading>
+              <span style="font-size: 16px;margin-top: 5px;display: block;">实时视频<i class="fa fa-close m-l-xs"></i></span>
+            </tab-heading>
+            <!-- column -->
+            <div data-ng-include="'view/realtime/tab.html'"></div>
+            <!-- /column -->
+          </tab>
+          <tab ng-repeat="title in ['视频回放','监视器','报警','电视墙']">
+            <tab-heading>
+              <span style="font-size: 16px;margin-top: 5px;display: block;">{{title}}<i class="fa fa-close m-l-xs"></i></span>
+            </tab-heading>
+            <!-- column -->
+            <!-- /column -->
+          </tab>
+        </tabset>
+      </div>
+    </div>
+  </div>
+  <!-- /column -->
+
+
+</div>
+<!-- /hbox layout -->
