@@ -38,7 +38,6 @@ li {
 #content {
 	z-index:1;
 	height:100%;
-	padding-left:300px;
 	/*background-color:#CEEDFC;*/
 }
 #content #content-left, #content #content-right {
@@ -48,7 +47,6 @@ li {
 }
 #content #content-left {
 	width:300px;
-	margin-left:-300px;
 }
 #content #content-right {
 	width:100%;

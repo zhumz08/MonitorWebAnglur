@@ -89,25 +89,27 @@ function initRealToolBar(){
 function sizeContent() {
 	var newHeight,dh_h,operate_h,turnE_h,menu_h,turnE_menu_h,content_right_menu_h,content_right_menu_h_div,play_h;
 
+	var footerHeight = 60;
+
 	////info-bar  height
 	var infoBarEl = $("#info-bar");
 	var infoBarHeight = infoBarEl.is(":visible") ? infoBarEl.height() : 0;
 
-    newHeight = $(this).height() - $("#top").height() - infoBarHeight-60;  //得到content的高度
-	newWidth=$(this).width() - $("#content-left").width();          //得到content-right的宽度
+	var leftWidth = $("#content-left").width();
+
+    newHeight = $(this).height() - infoBarHeight-footerHeight;  //得到content的高度
+	newWidth=$(this).width() - leftWidth;          //得到content-right的宽度
 	//$(".show_h").text("width:"+newWidth+"height:"+newHeight);
 
 	$("#content").height(newHeight);        //设置content的高度
 	$("#content-right").width(newWidth);	//设置content-right的宽度
-	
-	dh_h=$(".dh-bar").outerHeight(true);   //得到左侧菜单导航条高度
 
 	operate_h=$(".operate").outerHeight(true);	//得到ptz标题高度
 	turnE_h=newHeight;			//导航栏第一部分的整体高度
 
 	menu_h=$(".menuA").outerHeight(true);
 	turnE_menu_h=turnE_h-0;				//导航栏第一部分的内容高度
-	
+
 	$("#turnE").height(turnE_h);
 	$("#turnE .turn").height(turnE_menu_h+infoBarHeight-105);
 	//$("#turnE .turn").text("width:"+"300,"+"height:"+turnE_menu_h);
@@ -118,9 +120,9 @@ function sizeContent() {
 	play_h=148;    								// VOD控件的高度；
 	content_right_menu_h=newHeight-menu_h;
 	content_right_menu_h_div=newHeight-menu_h-play_h;	//得到content-right 主要内容的高度；
-	content_right_menu_w_div=newWidth;
+	//content_right_menu_w_div=newWidth;
 
-	$("#content-right .turn").height(content_right_menu_h);	
+	$("#content-right .turn").height(content_right_menu_h);
 	$("#content-right .turn .show_h").height(content_right_menu_h_div);
 
 	showLayout(winNum);

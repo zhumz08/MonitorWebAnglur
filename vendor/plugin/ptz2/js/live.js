@@ -9,24 +9,68 @@ $(function(){
 
 });
 
+
+function hideContentLeft(){
+	try{
+		/*$('#content-left').css('width','15px');
+		$('#treenavbar').css('display','none');
+		sizeContent();*/
+
+		if($('#turnE').is(":visible")){
+			$("#hideToolBtn").css("left","0px");
+			$("#hideToolBtn").find("i").removeClass("fa-angle-double-left");
+			$("#hideToolBtn").find("i").addClass("fa-angle-double-right");
+
+			$('#content-left').css('width','25px');
+			$('#turnE').css('display','none');
+		}else{
+
+			$("#hideToolBtn").css("left","275px");
+			$("#hideToolBtn").find("i").addClass("fa-angle-double-left");
+			$("#hideToolBtn").find("i").removeClass("fa-angle-double-right");
+
+			$('#content-left').css('width','300px');
+			$('#turnE').css('display','');
+		}
+
+		sizeContent();
+	}catch(e){
+		alert("error"+e);
+	}
+
+}
+
+
 /**
  *  2016-9-6 18:59:47
  *  初始化播放器事件
  */
 function initPlayEvent(){
-	/**
+	try{
+
+/*		window.addEventListener('click',function(){
+			alert("window click");
+		},false);*/
+
+		/*addEvent($("#searchBtn")[0],'WindowProc',function(message, param1, param2){
+			alert("onclick" + message + "param1:" + param1 + " param2:" + param2);
+		});*/
+	}catch(e){
+		alert("Error e"+e);
+	}
+
+	/*/!**
 	*播放窗口单击事件绑定
-	*/
+	*!/
 	$("#screenPlay object[id^='realPlay']").each(function (index,item) {
 		//开启解码器  ptz操作功能
 		//$(this).get(0).PTZControlCS(2, 1, 1, 0);
-		alert("initPlayEvent");
 
 		// 绑定解码器事件
 		addEvent($(this).get(0), 'WindowProc', function (message, param1, param2) {
 			//.attachEvent('WindowProc', function (message, pram1, pram2)
-			alert("onclick" + message + "param1:" + param1 + " param2:" + param2);
-			/*//单击--选中事件
+			//alert("onclick" + message + "param1:" + param1 + " param2:" + param2);
+			/!*!//单击--选中事件
 			 if (message==0x201)
 			 {
 			 //log.debug(message);
@@ -50,9 +94,9 @@ function initPlayEvent(){
 			 currCameraName=wininfo[1];
 			 }
 			 }
-			 }*/
+			 }*!/
 		});
-	});
+	});*/
 }
 
 
@@ -67,11 +111,14 @@ function stopLive(){
 			log.warn("还没有选择摄像头");
 			return false;
 		}
-		log.debug("停止当前摄像头直播,currCameraId:"+currCameraId);
 
-		//log.debug("userKey,currCameraId, currWinNo:" + userKey+","+currCameraId+","+currWinNo);
+		log.debug("停止当前摄像头直播,currCameraId:"+userKey+","+currCameraId+","+currWinNo);
 		var result = commonOcxObj.StopLive(userKey,currCameraId, currWinNo);
 		log.debug("停止成功,result:"+result);
+
+		//初始化软解窗口，否则窗口一致保持最后画面，而不是黑屏
+		document.getElementById("realPlay" + currWinNo).Initialize(1,0,0,0,0);
+
 		currCameraId = false;
 	}catch(e){
 		log.debug("stopLive"+e);

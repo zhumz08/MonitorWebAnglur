@@ -4704,6 +4704,11 @@ a.text-#000000:hover {
   margin: 0;
 }
 
+.w-xxxs {
+  width: 15px;
+}
+
+
 .w-xxs {
   width: 60px;
 }

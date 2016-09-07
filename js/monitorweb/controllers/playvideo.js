@@ -4,6 +4,7 @@
 
 app.controller('RealTimeVideoCtrl', ['$scope', '$http', '$state', function($scope, $http, $state) {
     $scope.videoPosition = 1; //相机预置位
+    $scope.showToolbar = '';
 
     ////放大缩小按钮变化
     $scope.sliderChange = function(id,param){
@@ -54,9 +55,10 @@ app.controller('RealTimeVideoCtrl', ['$scope', '$http', '$state', function($scop
             $(this).find("img").attr("src","img/PTZ/"+btnName+"-click.png");
 
             // alert($(this).attr('name'));
-            window.frames["videoFrame"].PTZOperator($(this).attr('name'), 'down')
+            window.frames["videoFrame"].PTZOperator($(this).attr('name'), 'down');
         }).mouseup(function(){
             var btnName = $(this).attr("btnName");
+            window.frames["videoFrame"].PTZOperator($(this).attr('name'), 'up');
         });
 
         $(".ptzlink").hover(function(){
@@ -73,7 +75,24 @@ app.controller('RealTimeVideoCtrl', ['$scope', '$http', '$state', function($scop
             $(this).find("img").attr("src","img/PTZ/"+btnName+"-default.png");
         });
 
+    }
 
+    $scope.tooltitle = '';
+    $scope.hideToolbar = function(){
+        var toolBarEl = angular.element("#toolBar");
+        if(toolBarEl.hasClass("w-lg")){
+            toolBarEl.removeClass("w-lg");
+            toolBarEl.addClass("w-xxxs");
+            $scope.tooltitle = 'hidden';
+            $("#videoFrame").css("padding-right","15px");
+        }else{
+            toolBarEl.removeClass("w-xxxs");
+            toolBarEl.addClass("w-lg");
+
+            $("#videoFrame").css("padding-right","280px");
+
+            $scope.tooltitle = '';
+        }
     }
 
 }]);

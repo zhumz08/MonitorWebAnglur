@@ -18,16 +18,21 @@
     <link rel="stylesheet" href="../../../css/simple-line-icons.css" type="text/css" />
     <script src="../../tabs/js/cbpFWTabs.js"></script>
 
-
-
 </head>
-<body scroll="no" style="padding:0px;margin: 0px;overflow: hidden;" onload="initRealToolBar();sizeContent();">
+<body scroll="no" style="padding:0px;margin: 0px;" onload="initRealToolBar();sizeContent();">
 <div style="width:0px;height:0px">
     <!-- 通信控件-->
     <OBJECT id="commonOcx" classid="CLSID:55DCC094-72F7-43F8-89BA-95369D175ED9" width="0px " height="0px">
     </OBJECT>
 </div>
 <div id="content">
+    <div id="hideToolBtn" onmouseover="$(this).find('a').show();" onmouseout="$(this).find('a').hide();"
+         style="position: absolute;left: 275px;top:50%;padding: 5px;z-index: 1;width:25px;background: none;height: 100%;top:0px;">
+        <a style="padding: 15px 15px 15px 5px;position: relative;top:50%;display: block;display: none;left: 0px;" onclick="hideContentLeft()" class="bg-info">
+            <i  class="fa fa-angle-double-left fa-2x"></i>
+        </a>
+    </div>
+
     <div id="content-left">
         <div id="turnE">
             <div class="menuA_content">
@@ -44,7 +49,7 @@
                                     <div class="input-group">
                                         <input type="text" onkeyup="window.frames['realTimeTreeFrame'].getFind(this.value);" class="form-control input-sm no-bg b-a no-border rounded padder" placeholder="请输入要搜索的内容...">
                                         <span class="input-group-btn">
-                                            <button type="submit" class="btn btn-sm bg-white b-a rounded"><i class="fa fa-search text-info"></i></button>
+                                            <button type="submit" id="searchBtn" class="btn btn-sm bg-white b-a rounded"><i class="fa fa-search text-info"></i></button>
                                         </span>
                                     </div>
                                 </div>
