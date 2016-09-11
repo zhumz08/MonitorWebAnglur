@@ -84,12 +84,12 @@ app.controller('RealTimeVideoCtrl', ['$scope', '$http', '$state', function($scop
             toolBarEl.removeClass("w-lg");
             toolBarEl.addClass("w-xxxs");
             $scope.tooltitle = 'hidden';
-            $("#videoFrame").css("padding-right","15px");
+            $("#videoFrame").css("padding-right","0px");
         }else{
             toolBarEl.removeClass("w-xxxs");
             toolBarEl.addClass("w-lg");
 
-            $("#videoFrame").css("padding-right","280px");
+            $("#videoFrame").css("padding-right","260px");
 
             $scope.tooltitle = '';
         }

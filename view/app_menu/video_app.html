@@ -1,0 +1,7 @@
+<div class="wrapper" style="width: 300px;float: left;height: 180px;margin-left: 15px;"
+     ng-repeat="menu in [{title:'实时视频',pic:'02',path:'view/realtime/tab.html'},{title:'历史回放',pic:'03',close:true}]">
+    <img src="./img/app_menu/monitor_{{menu.pic}}.jpg" ng-click="addMainTab(menu)"  style="width: 300px;height: 180px;"/>
+    <div class="text-center wrapper-xs" style="width: 100%;">
+        <span class="font-bold">{{menu.title}}</span>
+    </div>
+</div>

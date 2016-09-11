@@ -12,27 +12,16 @@
     <div class="vbox" >
       <div ng-controller="TabsDemoCtrl">
         <tabset class="tab-container">
-          <tab ng-repeat="title in ['应用中心']">
+          <tab  ng-repeat="tabApp in mainAppTabs">
             <tab-heading>
-              <span style="font-size: 20px;font-weight: 900;">{{title}}</span>
-            </tab-heading>
-            <div data-ng-include="'view/mainApp.html'"></div>
+              <span style="font-size: 20px;font-weight: 900;" class="{{tabApp.isMain ? '':'hidden'}}">{{tabApp.title}}</span>
+              <span style="font-size: 16px;margin-top: 5px;display: block;"  class="{{tabApp.isMain ? 'hidden':''}}">{{tabApp.title}}
+                <a  ng-click="closeMainTab($index,tabApp)" class="text-warning {{tabApp.close?'':'hidden'}}"><i class="fa fa-close m-l-xs"></i></a>
+              </span>
 
-            <!-- column -->
-            <!-- /column -->
-          </tab>
-          <tab>
-            <tab-heading>
-              <span style="font-size: 16px;margin-top: 5px;display: block;">实时视频<i class="fa fa-close m-l-xs"></i></span>
             </tab-heading>
-            <!-- column -->
-            <div data-ng-include="'view/realtime/tab.html'"></div>
-            <!-- /column -->
-          </tab>
-          <tab ng-repeat="title in ['视频回放','监视器','报警','电视墙']">
-            <tab-heading>
-              <span style="font-size: 16px;margin-top: 5px;display: block;">{{title}}<i class="fa fa-close m-l-xs"></i></span>
-            </tab-heading>
+            <div data-ng-include="tabApp.path"></div>
+
             <!-- column -->
             <!-- /column -->
           </tab>

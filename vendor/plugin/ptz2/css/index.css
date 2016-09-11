@@ -20,9 +20,6 @@ li {
 	list-style:none;
 	list-style-type:none;
 }
-#top, #info-bar, #content {
-	position:relative;
-}
 #top, #info-bar {
 	z-index:2;
 }
@@ -36,20 +33,19 @@ li {
 	border:1px solid #23b7e5;
 }
 #content {
-	z-index:1;
 	height:100%;
+	width: 100%;
 	/*background-color:#CEEDFC;*/
 }
 #content #content-left, #content #content-right {
-	display:inline;
-	float:left;
 	height:100%;
 }
 #content #content-left {
-	width:300px;
+	width:320px;
+	float:left;
 }
 #content #content-right {
-	width:100%;
+	float: left;
 }
 /*-------------------------head-----------------------------------*/
 

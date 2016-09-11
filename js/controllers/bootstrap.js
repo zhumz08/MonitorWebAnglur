@@ -219,6 +219,27 @@
       { title:'Dynamic Title 1', content:'Dynamic content 1' },
       { title:'Dynamic Title 2', content:'Dynamic content 2', disabled: true }
     ];
+
+    $scope.mainAppTabs = [{
+      title:'应用中心',
+      isMain: true,
+      close: false,
+      path:'view/mainApp.html'
+    }];
+
+    $scope.mainTabTitle = '<span style="font-size: 20px;font-weight: 900;">应用中心</span>';
+    $scope.mainTabTitle = '<span style="font-size: 16px;margin-top: 5px;display: block;">{{tabApp.title}}' +
+        '<a  ng-click="closeMainTab(tabApp)" class="text-warning"><i class="fa fa-close m-l-xs"></i></a></span>';
+
+    $scope.addMainTab = function(tab){
+      $scope.mainAppTabs.push(tab);
+    }
+
+    $scope.closeMainTab = function (idx,tab) {
+      $scope.mainAppTabs.splice(idx,1);
+    }
+
+
   }])
   ; 
   app.controller('RatingDemoCtrl', ['$scope', function($scope) {

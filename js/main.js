@@ -88,4 +88,8 @@ angular.module('app')
       });
 
 
+      $scope.addTab = function(path,title){
+        mainAppTabs.push({title:title,path:path});
+      }
+
     }]);

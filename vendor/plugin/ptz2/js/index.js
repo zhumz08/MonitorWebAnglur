@@ -94,11 +94,10 @@ function sizeContent() {
 	////info-bar  height
 	var infoBarEl = $("#info-bar");
 	var infoBarHeight = infoBarEl.is(":visible") ? infoBarEl.height() : 0;
+	var leftWidth = $("#content-left").width() + 20;
 
-	var leftWidth = $("#content-left").width();
-
-    newHeight = $(this).height() - infoBarHeight-footerHeight;  //得到content的高度
-	newWidth=$(this).width() - leftWidth;          //得到content-right的宽度
+    newHeight = $(this).height() - infoBarHeight - footerHeight;  //得到content的高度
+	var newWidth = $(this).width() - leftWidth;          //得到content-right的宽度
 	//$(".show_h").text("width:"+newWidth+"height:"+newHeight);
 
 	$("#content").height(newHeight);        //设置content的高度
@@ -379,8 +378,8 @@ function login(userParam)
 	}
 	else
 	{
-		commonOcxObj=document.getElementById("commonOcx");
 		//注册通讯控件
+		commonOcxObj = document.getElementById("commonOcx");
 		if (!commonOcxObj)
 		{
 			log.error("无法获取调用通信控件!");
@@ -390,8 +389,10 @@ function login(userParam)
 		}
 		//通讯控件初始化
 		userKey = commonOcxObj.Initialize(0);
-		var r = commonOcxObj.ConnectToServer(userKey, hostName, hostPort);
+		log.debug("hostName:" + hostName + "hostPort:" + hostPort);
+
 		// 连接服务器成功
+		var r = commonOcxObj.ConnectToServer(userKey, hostName, hostPort);
 		if (r != 0)
 		{
 			log.error("连接服务器失败！请检查服务器地址和端口");
@@ -400,8 +401,11 @@ function login(userParam)
 			return;
 		}
 		$("#loginlogspan").hide();
-		log.debug("连接服务器成功！正在登录...");
-		commonOcxObj.UserLogin(userKey, userName, userPwd);
+		log.debug("连接服务器成功！正在登录..." + r);
+
+		log.debug("userKey" + userKey + "userName:" + userName + "userPwd:" + userPwd);
+		var retVal = commonOcxObj.UserLogin(userKey, userName, userPwd);
+		log.debug("登录成功"+retVal);
 
 		//成功的话，关闭登陆框
 		//hideActive(1);
@@ -430,6 +434,7 @@ function OnSDKMessageEvent(lMsgType, strContent)
 		//返回登录信息
 	case 0x0002:
 		{
+			log.debug("login:" + strContent);
 			returnLogin(strContent);
 			break;
 		}

@@ -17,7 +17,7 @@ angular.module('app')
       function ($stateProvider,   $urlRouterProvider) {
           
           $urlRouterProvider
-              .otherwise('/monitorweb/video');
+              .otherwise('/access/signin');
           $stateProvider
               .state('app', {
                   abstract: true,
@@ -313,7 +313,7 @@ angular.module('app')
               })
               .state('access.signin', {
                   url: '/signin',
-                  templateUrl: 'tpl/page_signin.html',
+                  templateUrl: 'view/login/page_signin.html',
                   resolve: {
                       deps: ['uiLoad',
                         function( uiLoad ){

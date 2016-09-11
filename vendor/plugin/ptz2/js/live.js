@@ -406,7 +406,7 @@ function showLayout(num,index)
 		{
 			log.debug(index + "号窗口单屏");
 			//在9窗口中选中7窗口，切换为4窗口，然后点单屏
-			if(index>winNum)
+			if(index > winNum)
 			{
 				log.warn("请先选中要单屏的窗口");
 				return ;
@@ -415,23 +415,27 @@ function showLayout(num,index)
 		
 		if(!num)
 		{
-			num=winNum;
+			num = winNum;
 		}else
 		{
 			if(!index)
 			{
-				log.debug(num+"分屏");
+				log.debug(num + "分屏");
 			}
-			winNum=num;
+			winNum = num;
 		}
-		var tmpnum=Math.sqrt(num);
+
+		var tmpnum = Math.sqrt(num);
 		var p,q,k;
+
 		//可分屏区域宽度--- 注意播放窗口mergin 右，下各1px,需要提前减掉
-		p=$("#content-right").width()-tmpnum;
+		p = $("#content-right").width() - tmpnum;
+
 		//可分平区域高度-工具条高度
-		q=$("#content-right .turn").height()-$("#play-about").height()-tmpnum;
-		var tmpWidth=p/tmpnum;
-		var tmpHeight=q/tmpnum;
+		q = $("#content-right .turn").height()-$("#play-about").height()-tmpnum;
+
+		var tmpWidth = p/tmpnum;
+		var tmpHeight = q/tmpnum;
 		
 		$("div[id^=show]:lt("+num+")").css({'float':'left','width':tmpWidth,'height':tmpHeight}).show();
 		$("div[id^=show]:gt("+(num-1)+")").width(0).height(0).hide();//.css("display","none");
@@ -444,9 +448,11 @@ function showLayout(num,index)
 	else
 	{
 		log.debug(num+"分屏");
-		var w=$("#content-right").width()-2;
+		var w = $("#content-right").width()-2;
+
 		//可分平区域高度-工具条高度
-		var h=$("#content-right .turn").height()-$("#play-about").height()-2;
+		var h = $("#content-right .turn").height()-$("#play-about").height()-2;
+
 		$("div[id^=show]:gt("+(1)+")").width(0).height(0).hide();
 		if(num==6)
 		{
@@ -480,8 +486,8 @@ function fullDocument()
 		iffulldocument = false;
 		//alert(window.parent.document.body.clientWidth);
 		//alert(window.parent.document.body.clientHeight);
-		window.parent.frames["videoFrame"].width = "2400px";
-		window.parent.frames["videoFrame"].height = "1200px";
+		//window.parent.frames["videoFrame"].width = "2400px";
+		//window.parent.frames["videoFrame"].height = "1200px";
 		//$("#content-left,#info-bar").show();
 		/*if(f){
 			$("#info-bar").height(69);.

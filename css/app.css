@@ -4705,7 +4705,7 @@ a.text-#000000:hover {
 }
 
 .w-xxxs {
-  width: 15px;
+  width: 20px;
 }
 
 
@@ -5277,3 +5277,8 @@ a.text-#000000:hover {
 }
 
 
+
+.main-tab-title{
+  font-size: 20px;
+  font-weight: 900;
+}
