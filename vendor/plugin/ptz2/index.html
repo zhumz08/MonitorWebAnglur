@@ -20,11 +20,7 @@
 
 </head>
 <body scroll="no" style="padding:0px;margin: 0px;" onload="initRealToolBar();">
-<div style="width:0px;height:0px;" >
-    <!-- 通信控件-->
-    <OBJECT id="commonOcx" classid="CLSID:55DCC094-72F7-43F8-89BA-95369D175ED9" width="0px" height="0px">
-    </OBJECT>
-</div>
+
 <div id="content">
 <!--
     <div id="hideToolBtn" onmouseover="$(this).find('a').show();" onmouseout="$(this).find('a').hide();"
@@ -58,7 +54,7 @@
                                 <div class="show turn" style="display: block;">
                                     <!-- 实时摄像机树列表-->
                                     <iframe height="100%" id="realTimeTreeFrame" width="100%" style="padding-right:5px;" src="Tree.html" frameborder="0"></iframe>
-                                </div>Tree
+                                </div>
                               <!--  <div class="hidden turn" style="display: none;">
                                     &lt;!&ndash; 摄像机列表（视频列表用）&ndash;&gt;
                                     <div id="cameraHisTreeDiv" style="height: 100%; width: 100%; overflow: scroll;"></div>
@@ -341,9 +337,6 @@
 
     <script src="./js/Log.js" type="text/javascript"></script>
     <script src="./js/index.js" type="text/javascript"></script>
-    <script type="text/javascript" FOR="commonOcx" EVENT="OnSDKMessage(lMsgType, strContent)">
-        OnSDKMessageEvent(lMsgType, strContent);
-    </script>
 
     <script src="./js/left.js" type="text/javascript"></script>
     <script src="./js/live.js" type="text/javascript"></script>

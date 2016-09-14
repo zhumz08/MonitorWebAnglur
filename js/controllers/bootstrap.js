@@ -224,20 +224,20 @@
       title:'应用中心',
       isMain: true,
       close: false,
-      path:'view/mainApp.html'
+      path:'view/mainApp.html',
+      active:true
     }];
 
-    $scope.mainTabTitle = '<span style="font-size: 20px;font-weight: 900;">应用中心</span>';
-    $scope.mainTabTitle = '<span style="font-size: 16px;margin-top: 5px;display: block;">{{tabApp.title}}' +
-        '<a  ng-click="closeMainTab(tabApp)" class="text-warning"><i class="fa fa-close m-l-xs"></i></a></span>';
-
-    $scope.addMainTab = function(tab){
+    $scope.openMainTab = function(tab){
+      tab.active = true;
       $scope.mainAppTabs.push(tab);
     }
 
     $scope.closeMainTab = function (idx,tab) {
       $scope.mainAppTabs.splice(idx,1);
     }
+
+
 
 
   }])

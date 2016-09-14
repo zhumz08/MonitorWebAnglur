@@ -1,4 +1,4 @@
-<div class="modal-header">
+<div class="modal-header hidden">
     <div class="row">
         <div class="col-sm-10">
             <h3 class="modal-title">平台包头视频综合平台</h3>
@@ -8,7 +8,7 @@
 </div>
 <div class="modal-body">
     <div class="container w-xxl w-auto-xs" ng-controller="SigninFormController">
-        <a href class="navbar-brand block m-t">系统登录</a>
+        <a href class="navbar-brand block m-t">登录VIS服务器</a>
         <div class="m-b-lg">
             <form name="formValidate" class="form-horizontal form-validation">
                 <div class="text-danger wrapper text-center" ng-show="authError">
@@ -26,19 +26,19 @@
                         <input type="text" placeholder="端口号" class="col-sm-9 form-control" ng-model="user.hostPort" required>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group disabled">
                     <label class="col-sm-3 control-label">用户名:</label>
                     <div class="col-sm-9">
                         <input type="text" placeholder="端口号" class="col-sm-9 form-control" ng-model="user.userName" required>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group disabled">
                     <label class="col-sm-3 control-label">密码:</label>
                     <div class="col-sm-9">
                         <input type="password" placeholder="端口号" class="col-sm-9 form-control" ng-model="user.userPwd" required>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="userLogin()" ng-disabled='form.$invalid'>登录</button>
+                <button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="loginServer()" ng-disabled='form.$invalid'>登录</button>
 <!--                <div class="text-center m-t m-b"><a ui-sref="access.forgotpwd">Forgot password?</a></div>
                 <div class="line line-dashed"></div>
                 <p class="text-center"><small>Do not have an account?</small></p>

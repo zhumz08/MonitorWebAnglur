@@ -12,8 +12,7 @@ var isLogin=false;
 var username='';
 
 //通讯控件
-var commonOcxObj=document.getElementById("commonOcx");
-var userKey=0;
+var userKey = window.parent.userKey;
 
 //当前选中（显示）窗口---
 var currWinNo=1;
@@ -40,6 +39,9 @@ var hisVideoXmlArr;
 //页面布局函数
 $(window).resize(sizeContent);
 
+var commonOcxObj = window.parent.commonOcxObj;
+
+
 // 设备树列表
 var xmlDeviceDoc = new ActiveXObject("Microsoft.XMLDOM");
 var listGroup = new Object(); 
@@ -51,7 +53,6 @@ $(function(){
 
 	//初始化实时视频播放工具栏
 	initRealToolBar();
-
 
 });
 
@@ -332,43 +333,43 @@ function logout()
 		hisTree.deleteChildItems(0);
 		videoTree.deleteChildItems(1);
 	}
-	 
+
 	$("#dl>span").text('登录');
 	$(".welcome").hide();
-	
+
 	//左侧恢复到摄像头菜单区
 	$('#shexiangjili').trigger('click');
 	//右侧区域 变为首窗口单屏
 	showLayout(1);
 	isLogin=false;*/
 
-	window.frames["realTimeTreeFrame"].logout();
-
-	if (commonOcxObj != null)
-	{
-		return commonOcxObj.UserLogout(userKey);
+	try{
+		window.frames["realTimeTreeFrame"].logout();
+		return 1;
+	}catch(e){
+		alert("error realtime" + e);
 	}
-	return 1;
 }
 
 //登陆事件
 function login(userParam)
 {
+	alert(userParam);
 	var userName = null;
 	var userPwd = null;
 	var hostName = null;
 	var hostPort = null;
 
 	if(userParam){
-		var userName=userParam.userName;
-		var userPwd=userParam.userPwd;
-		var hostName=userParam.hostName;
-		var hostPort=userParam.hostPort;
+		 userName=userParam.userName;
+		 userPwd=userParam.userPwd;
+		 hostName=userParam.hostName;
+		 hostPort=userParam.hostPort;
 	}else{
-		var userName=$("#username").val();
-		var userPwd=$("#password").val();
-		var hostName=$("#ip").val();
-		var hostPort=$("#port").val();
+		 userName=$("#username").val();
+		 userPwd=$("#password").val();
+		 hostName=$("#ip").val();
+		 hostPort=$("#port").val();
 	}
 
 
@@ -379,7 +380,6 @@ function login(userParam)
 	else
 	{
 		//注册通讯控件
-		commonOcxObj = document.getElementById("commonOcx");
 		if (!commonOcxObj)
 		{
 			log.error("无法获取调用通信控件!");
@@ -404,7 +404,7 @@ function login(userParam)
 		log.debug("连接服务器成功！正在登录..." + r);
 
 		log.debug("userKey" + userKey + "userName:" + userName + "userPwd:" + userPwd);
-		var retVal = commonOcxObj.UserLogin(userKey, userName, userPwd);
+		var retVal = window.parent.commonOcxObj.UserLogin(userKey, userName, userPwd);
 		log.debug("登录成功"+retVal);
 
 		//成功的话，关闭登陆框
@@ -421,79 +421,7 @@ function login(userParam)
 
 //通讯控件事件绑定
 //document.getElementById("commonOcx").addEventListener("OnSDKMessage", function (lMsgType, strContent)
-function OnSDKMessageEvent(lMsgType, strContent)
-{
-	switch (lMsgType)
-	{
-		//心跳
-	case 0x0000:
-		{
-			// log.debug("回调事件. 心跳   类型："+lMsgType);
-			return;
-		}
-		//返回登录信息
-	case 0x0002:
-		{
-			log.debug("login:" + strContent);
-			returnLogin(strContent);
-			break;
-		}
-		//收到某一个摄像机关联的Host信息---实时播放回调
-	case 1541:
-		{
-			// log.debug("回调事件. 收到某一个摄像机关联的Host信息   类型："+lMsgType);
-			returnStartLive(strContent);
-			break;
-		}
-	case 1550: // 历史视频播放 调用StartVod 返回结果
-		{
-			//log.debug("回调事件. 播放视频   类型："+lMsgType);
-			returnStartVod(strContent);
-			break;
-		}
-	case 1553: //  通知时间线信息
-		{
-			//log.debug("视频播放时间线事件：" + strContent);
-			try
-			{
-				var xmlDoc = getXMLDoc(strContent);
-				var elements = xmlDoc.getElementsByTagName("uiPosition");
-				var curTime = parseInt(elements[0].firstChild.nodeValue);
-				//top.mainPage.timeLineObj.SetPlayTimeShow(curTime);
-				timeLineObj.SetPlayTimeShow(curTime);
-			}
-			catch(e)
-			{
-			}
-			break;
-		}
-	case 1564: // 摄像机组信息列表
-		{
-			log.debug("获取摄像机组信息   类型：" + lMsgType);
-			returnGetCarmGroupList(strContent);
-			break;
-		}
-		// 返回实时摄像机列表
-	case 1566:
-		{
-			log.debug("获取摄像机列表   类型：" + lMsgType);
-			//treeObj.parseGroupXML(strContent);
-			returnGetCarmList(strContent);
 
-			break;
-		}
-		// 返回某一路摄像机历史记录
-	case 1568:
-		{
-			log.debug("回调事件. 返回相机历史记录   类型：" + lMsgType);
-			returnGetCamHisVideo(strContent);
-			break;
-		}
-	default:
-		//log.debug("信息类型:"+lMsgType + "信息内容:"+ strContent);
-		break;
-	}
-}
 /**
  * 登陆验证
  */
@@ -588,56 +516,6 @@ window.onbeforeunload=function()
 	}
 };
 
-/**
- * 通讯控件返回的  登录动作反馈
- * @param content 返回的登陆信息-xml格式
- */
-function returnLogin(content)
-{
-	var xmlDoc = getXMLDoc(content);
-	var key = -1;
-	var descption = "";
-	var elements = xmlDoc.getElementsByTagName("RetUserLogin");
-	for (var i = 0; i < elements.length; i++)
-	{
-		try
-		{
-			key = elements[i].getElementsByTagName("ret")[0].getElementsByTagName("iValue")[0].firstChild.nodeValue;
-			descption = elements[i].getElementsByTagName("ret")[0].getElementsByTagName("description")[0].firstChild.nodeValue;
-		}
-		catch(e)
-		{
-		}
-	}
-	
-	//登录成功
-	if (key == 0)
-	{
-		log.debug("登录成功 ");
-		$("#dl>span").text('注销'); 
-		$("#loginlogspan").hide();
-		isLogin = true;
-		
-		//欢迎信息用户名显示。
-		$(".loginName").text(username);
-		$(".welcome").show();
-		
-		//列出相机组、相机列表
-		//log.debug("获取摄像机组,摄像机信息.");
-		commonOcxObj.GetCameraGroup(userKey);
-		//commonOcxObj.GetCamera(userKey);
-	}
-	else
-	{
-		//登录失败 --重新打开登录框，并显示登录失败信息
-		log.error("登录失败 ：" + descption);
-		$("#loginlogspan").show();
-		$("#loginlogspan").text("登录失败:" + descption);
-		log.warn("登录失败:" + descption)
-		hideActive(0);
-		$("#logindiv").dialog("open");
-	}
-}
 
 /**
  * 返回摄像机组信息
@@ -646,13 +524,13 @@ function returnLogin(content)
 function returnGetCarmGroupList(content) {
 	try{
 
-		window.frames["realTimeTreeFrame"].treeObj.parseGroupXML(getXMLDoc(content));
+		window.frames["realTimeTreeFrame"].treeObj.parseGroupXML(content);
 		window.frames["realTimeTreeFrame"].initTree();
 
 		//获取摄像头组后接着获取摄像头
 		//alert(userKey);
-		commonOcxObj.GetCamera(userKey);
-
+		alert("window.parent.commonOcxObj" + window.parent.commonOcxObj);
+		window.parent.commonOcxObj.GetCamera(window.parent.userKey);
 	}catch(e){
 		alert("error  returnGetCarmGroupList"+e);
 	}
@@ -694,7 +572,7 @@ function addGroup(parentId, parentIdArray, groupIdArray, groupNameArray)
  */
 function returnGetCarmList(content)
 {
-	window.frames["realTimeTreeFrame"].addCameraXML(getXMLDoc(content));
+	window.frames["realTimeTreeFrame"].addCameraXML(content);
 
 	/*//console.info("content:" + content);
 	var xmlDoc = getXMLDoc(content);
@@ -773,12 +651,17 @@ function hideToolInfo(){
  */
 function playCarmVideo(cameraId)
 {
-	var versionId = 0; // 版本号
-	var playType = 4; //1: UDP组播; 2: UDP单播; 3: TCP服务端; 4: TCP客户端
-	var reviceIpAddr = ""; //接收端码流 若uiPlayType为TCP客户端，该值可忽略，填空
-	var revicePort = 0; //若uiPlayType为TCP客户端，该值可忽略，填0
-	var playStreamType = 0; //0: 自动分配码流; 1: 码流1; 2: 码流2;  3: 码流3
-	commonOcxObj.startLive(userKey, cameraId, currCameraId, versionId, playType, reviceIpAddr, revicePort, playStreamType);
+	try{
+		//alert("cameraId"+cameraId + "currCameraId"+currCameraId+"userKey:"+window.parent.userKey);
+		var versionId = 0; // 版本号
+		var playType = 4; //1: UDP组播; 2: UDP单播; 3: TCP服务端; 4: TCP客户端
+		var reviceIpAddr = ""; //接收端码流 若uiPlayType为TCP客户端，该值可忽略，填空
+		var revicePort = 0; //若uiPlayType为TCP客户端，该值可忽略，填0
+		var playStreamType = 0; //0: 自动分配码流; 1: 码流1; 2: 码流2;  3: 码流3
+		commonOcxObj.startLive(window.parent.userKey, cameraId, currCameraId, versionId, playType, reviceIpAddr, revicePort, playStreamType);
+	}catch(e){
+		alert(" Camera error" + e);
+	}
 }
 
 /**
@@ -787,35 +670,39 @@ function playCarmVideo(cameraId)
  */
 function returnStartLive(content)
 {
-	var xmlDoc = getXMLDoc(content);
-	//var cameraId = 0;
-	var wndId = 0;
-	//var codeRate = 0;
-	//var videoFormat = 0;
-	//var codeType =0;
-	//var fps = 0;
-	//var resloution = 0;
-	var playType = 0;
-	var palyAddr = "";
-	var playPort = 0;
-	//var encAddr = "";
-	var elements = xmlDoc.getElementsByTagName("RetStartLive");
-	for (var i = 0; i < elements.length; i++)
-	{
-		// cameraId = elements[i].getElementsByTagName("ubiCameraId")[0].firstChild.nodeValue;
-		wndId = elements[i].getElementsByTagName("ubiWndId")[0].firstChild.nodeValue;
-		codeRate = elements[i].getElementsByTagName("uiCodecRate")[0].firstChild.nodeValue;
-		videoFormat = elements[i].getElementsByTagName("uiVideoFormat")[0].firstChild.nodeValue;
-		codeType = elements[i].getElementsByTagName("uiCodecType")[0].firstChild.nodeValue;
-		fps = elements[i].getElementsByTagName("uiFPS")[0].firstChild.nodeValue;
-		resloution = elements[i].getElementsByTagName("uiResloution")[0].firstChild.nodeValue;
-		playType = elements[i].getElementsByTagName("uiPlayType")[0].firstChild.nodeValue;
-		palyAddr = elements[i].getElementsByTagName("szPlayAddr")[0].firstChild.nodeValue;
-		playPort = elements[i].getElementsByTagName("uiPlayPort")[0].firstChild.nodeValue;
-		encAddr = elements[i].getElementsByTagName("szEncAddr")[0].firstChild.nodeValue;
+	try{
+		var xmlDoc = content;
+		//var cameraId = 0;
+		var wndId = 0;
+		//var codeRate = 0;
+		//var videoFormat = 0;
+		//var codeType =0;
+		//var fps = 0;
+		//var resloution = 0;
+		var playType = 0;
+		var palyAddr = "";
+		var playPort = 0;
+		//var encAddr = "";
+		var elements = xmlDoc.getElementsByTagName("RetStartLive");
+		for (var i = 0; i < elements.length; i++)
+		{
+			// cameraId = elements[i].getElementsByTagName("ubiCameraId")[0].firstChild.nodeValue;
+			wndId = elements[i].getElementsByTagName("ubiWndId")[0].firstChild.nodeValue;
+			codeRate = elements[i].getElementsByTagName("uiCodecRate")[0].firstChild.nodeValue;
+			videoFormat = elements[i].getElementsByTagName("uiVideoFormat")[0].firstChild.nodeValue;
+			codeType = elements[i].getElementsByTagName("uiCodecType")[0].firstChild.nodeValue;
+			fps = elements[i].getElementsByTagName("uiFPS")[0].firstChild.nodeValue;
+			resloution = elements[i].getElementsByTagName("uiResloution")[0].firstChild.nodeValue;
+			playType = elements[i].getElementsByTagName("uiPlayType")[0].firstChild.nodeValue;
+			palyAddr = elements[i].getElementsByTagName("szPlayAddr")[0].firstChild.nodeValue;
+			playPort = elements[i].getElementsByTagName("uiPlayPort")[0].firstChild.nodeValue;
+			encAddr = elements[i].getElementsByTagName("szEncAddr")[0].firstChild.nodeValue;
+		}
+		// 调用实时播放页面播放方法
+		startRealPlay(palyAddr, playPort, playType, wndId, window.parent.userKey);
+	}catch (e){
+		alert("Play Real " + e);
 	}
-	// 调用实时播放页面播放方法
-	startRealPlay(palyAddr, playPort, playType, wndId, userKey);
 }
 
 /**
@@ -851,27 +738,6 @@ function returnGetCamHisVideo(content)
 }
 
 
-/**
- * 解析XML
- */
-function getXMLDoc(xmlString)
-{
-	var xmlDomVersions = ['MSXML.2.DOMDocument.6.0', 'MSXML.2.DOMDocument.3.0', 'Microsoft.XMLDOM'];
-	for (var i = 0; i < xmlDomVersions.length; i++)
-	{
-		try
-		{
-			xmlDoc = new ActiveXObject(xmlDomVersions[i]);
-			xmlDoc.async = false;
-			xmlDoc.loadXML(xmlString);
-			return xmlDoc;
-		}
-		catch (e)
-		{
-			log.warn(e);
-		}
-	}
-}
 
 
 /**

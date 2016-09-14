@@ -172,45 +172,47 @@ var lightOpen=0;
 */
 function PTZOperator(action, speed)
 {
-	
-	//鼠标按下 为1 ‘开’、开始调用，鼠标抬起为 0“停止调用”
-	if(speed=='down')
-	{
-		speed=1;
-		//预制位设置，调用，需要提取参数 预制位号码
-		if(action==15||action==16)
+	try{
+		//鼠标按下 为1 ‘开’、开始调用，鼠标抬起为 0“停止调用”
+		if(speed=='down')
 		{
-			speed=$("#yuzhiwei").val();
-			if(!speed)
+			speed=5;
+			//预制位设置，调用，需要提取参数 预制位号码
+			if(action==15||action==16)
 			{
-				speed=1;
-				$("#yuzhiwei").val('1');
+				speed=$("#yuzhiwei").val();
+				if(!speed)
+				{
+					speed=1;
+					$("#yuzhiwei").val('1');
+				}
+			}
+
+			//闪光灯的操作为点一下开，再点一下关
+			if(action==17)
+			{
+				if(!lightOpen)
+				{
+					lightOpen=1;
+				}else
+				{
+					lightOpen=0;
+					speed=0;
+				}
+			}
+		}else
+		{
+			speed=0;
+			//闪光灯，预制位 操作，没有抬起操作
+			if(action>=15&&action<20)
+			{
+				return ;
 			}
 		}
-		
-		//闪光灯的操作为点一下开，再点一下关
-		if(action==17)
-		{
-			if(!lightOpen)
-			{
-				lightOpen=1;
-			}else
-			{
-				lightOpen=0;
-				speed=0;
-			}
-		}
-	}else
-	{
-		speed=0;
-		//闪光灯，预制位 操作，没有抬起操作
-		if(action>=15&&action<20)
-		{
-			return ;
-		}
+		realPTZOperator(action, speed);
+	}catch(e){
+		alert("window PTZ error" + e);
 	}
-	realPTZOperator(action, speed)
-	
 }
 
  
@@ -221,14 +223,13 @@ function PTZOperator(action, speed)
   */
 function realPTZOperator(action, speed)
 {
-	
 	if((action<=4)&&(speed==1))
 	{
 		speed=50;
 	}
 	//log.debug('动作：'+action+" speed:"+speed);
 	var result=0;
-	
+
 	for(var i=0,len=ptz.length;i<len;i++)
 	{
 		if(ptz[i][0]==action)
@@ -239,9 +240,9 @@ function realPTZOperator(action, speed)
 	}
 	if(action)
 	{
-		 result = commonOcxObj.ReqPTZ(userKey, currCameraId, action, speed, 0);
+		result = commonOcxObj.ReqPTZ(window.parent.userKey, currCameraId, action, speed, 0);
 	}
-	
+
 	if (result != 0)
 	{
 		log.error("PZT 操作失败 .   错误代码：" + result);

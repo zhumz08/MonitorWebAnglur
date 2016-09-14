@@ -2573,22 +2573,31 @@
   margin: 0;
   padding: 0;
   list-style-type: none;
+  z-index: 10;
+
 }
 .tree li {
   white-space: nowrap;
+  z-index: 10;
+
 }
 .tree li ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
+  z-index: 10;
+
 }
 .tree-node {
   height: 18px;
+  z-index: 10;
   white-space: nowrap;
   cursor: pointer;
 }
 .tree-hit {
   cursor: pointer;
+  z-index: 10;
+
 }
 .tree-expanded,
 .tree-collapsed,
@@ -2601,26 +2610,33 @@
   height: 18px;
   vertical-align: top;
   overflow: hidden;
+  z-index: 10;
 }
 .tree-expanded {
   background: url('images/tree_icons.png') no-repeat -18px 0px;
+  z-index:5;
 }
 .tree-expanded-hover {
   background: url('images/tree_icons.png') no-repeat -50px 0px;
+  z-index:5;
 }
 .tree-collapsed {
   background: url('images/tree_icons.png') no-repeat 0px 0px;
+  z-index:5;
 }
 .tree-collapsed-hover {
+  z-index:5;
   background: url('images/tree_icons.png') no-repeat -32px 0px;
 }
 .tree-lines .tree-expanded,
 .tree-lines .tree-root-first .tree-expanded {
   background: url('images/tree_icons.png') no-repeat -144px 0;
+  z-index:5;
 }
 .tree-lines .tree-collapsed,
 .tree-lines .tree-root-first .tree-collapsed {
   background: url('images/tree_icons.png') no-repeat -128px 0;
+  z-index:5;
 }
 .tree-lines .tree-node-last .tree-expanded,
 .tree-lines .tree-root-one .tree-expanded {
@@ -2668,6 +2684,7 @@
   white-space: nowrap;
   padding: 0 2px;
   height: 18px;
+  z-index: 5;
   line-height: 18px;
 }
 .tree-node-proxy {
@@ -2676,7 +2693,7 @@
   padding: 0 2px 0 20px;
   border-width: 1px;
   border-style: solid;
-  z-index: 9900000;
+  z-index: 5;
 }
 .tree-dnd-icon {
   display: inline-block;
@@ -2686,21 +2703,31 @@
   left: 2px;
   top: 50%;
   margin-top: -9px;
+  z-index: 10;
+
 }
 .tree-dnd-yes {
   background: url('images/tree_icons.png') no-repeat -256px 0;
+  z-index: 10;
+
 }
 .tree-dnd-no {
   background: url('images/tree_icons.png') no-repeat -256px -18px;
+  z-index: 10;
 }
 .tree-node-top {
   border-top: 1px dotted red;
+  z-index: 10;
+
 }
 .tree-node-bottom {
   border-bottom: 1px dotted red;
+  z-index: 10;
+
 }
 .tree-node-append .tree-title {
   border: 1px dotted red;
+  z-index:10;
 }
 .tree-editor {
   border: 1px solid #95B8E7;
@@ -2713,19 +2740,25 @@
   vertical-align: top;
   position: absolute;
   top: 0;
+  z-index: 10;
+
 }
 .tree-node-proxy {
   background-color: #ffffff;
   color: #000000;
   border-color: #95B8E7;
+  z-index: 10;
+
 }
 .tree-node-hover {
   background: #eaf2ff;
   color: #000000;
+  z-index: 10;
 }
 .tree-node-selected {
   background: #ffe48d;
   color: #000000;
+  z-index: 10;
 }
 .tree-node-hidden {
   display: none;

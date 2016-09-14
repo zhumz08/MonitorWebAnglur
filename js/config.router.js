@@ -18,6 +18,8 @@ angular.module('app')
           
           $urlRouterProvider
               .otherwise('/access/signin');
+              //.otherwise("/monitorweb/video");
+
           $stateProvider
               .state('app', {
                   abstract: true,

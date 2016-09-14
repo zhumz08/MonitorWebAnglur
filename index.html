@@ -13,9 +13,17 @@
   <link rel="stylesheet" href="css/font.css" type="text/css" />
   <link rel="stylesheet" href="css/app.css" type="text/css" />
 </head>
-<body ng-controller="AppCtrl">
+<body ng-controller="AppCtrl" onunload="logout()">
+
+  <div style="width:0px;height:0px;" >
+    <!-- 通信控件-->
+    <OBJECT id="commonOcx" classid="CLSID:55DCC094-72F7-43F8-89BA-95369D175ED9" width="0px" height="0px">
+    </OBJECT>
+  </div>
+
   <div class="app" id="app"
        ng-class="{'app-header-fixed':app.settings.headerFixed, 'app-aside-fixed':app.settings.asideFixed, 'app-aside-folded':app.settings.asideFolded, 'app-aside-dock':app.settings.asideDock, 'container':app.settings.container}" ui-view></div>
+
 
   <!-- jQuery -->
   <script src="vendor/jquery/jquery.min.js"></script>
@@ -65,5 +73,12 @@
   <script src="js/directives/ui-validate.js"></script>
   <script src="js/controllers/bootstrap.js"></script>
   <!-- Lazy loading -->
+
+
+  <script type="text/javascript" FOR="commonOcx" EVENT="OnSDKMessage(lMsgType, strContent)">
+    OnSDKMessageEvent(lMsgType, strContent);
+  </script>
+
+
 </body>
 </html>

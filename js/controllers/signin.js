@@ -16,20 +16,9 @@ app.controller('SigninFormController', ['$scope', '$http', '$state','$rootScope'
 
     $scope.authError = null;
     $scope.userLogin = function() {
-      $scope.authError = null;
-        try{
+            $rootScope.user = $scope.user;
 
-            var v = window.parent.frames['videoFrame'].login($scope.user);
-            if(v=="OK"){
-                $rootScope.userInfo = $scope.user;
-                $scope.$parent.cancel();
-            }else{
-                $scope.authError = v;
-            }
-
-        }catch(e){
-            $scope.authError("error"+e);
-        }
+            $state.go("monitorweb.video");
 
      /* // Try to login
       $http.post('api/login', {email: $scope.user.email, password: $scope.user.password})
@@ -44,8 +33,26 @@ app.controller('SigninFormController', ['$scope', '$http', '$state','$rootScope'
       });*/
     };
 
+    $scope.loginServer = function(){
+        $scope.authError = null;
+
+        try{
+            userKey = commonOcxObj.Initialize(0);
+            var r = commonOcxObj.ConnectToServer(userKey, $scope.user.hostName, $scope.user.hostPort);
+            if(r==0){
+                var retVal = commonOcxObj.UserLogin(userKey, $scope.user.userName, $scope.user.userPwd);
+                if(retVal==0){
+                    $("#loginDiv").addClass("hidden");
+                    $("#videoDiv").removeClass("hidden");
+                    $("#toolBar").removeClass("hidden");
+                }
+            }
+        }catch(e){
+            $scope.authError = "login error" + e;
+        }
 
 
+    }
 
 
   }])

@@ -9,7 +9,6 @@ var islogin = false;
 //左侧 右侧窗口
 var leftPage, mainPage;
 
-var commonOcxObj = null;
 //通讯组件引用
 var key = 0;
 var hostName = "";

@@ -113,7 +113,7 @@ function stopLive(){
 		}
 
 		log.debug("停止当前摄像头直播,currCameraId:"+userKey+","+currCameraId+","+currWinNo);
-		var result = commonOcxObj.StopLive(userKey,currCameraId, currWinNo);
+		var result = commonOcxObj.StopLive(window.parent.userKey,currCameraId, currWinNo);
 		log.debug("停止成功,result:"+result);
 
 		//初始化软解窗口，否则窗口一致保持最后画面，而不是黑屏

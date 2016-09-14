@@ -58,8 +58,12 @@
 </div>&lt;!&ndash; / right col &ndash;&gt;
 -->
 
+<div id="loginDiv" class="hidden">
+    <div data-ng-include="'tpl/modal.html'"></div>
+</div>
+
 <!-- main -->
-<div class="col" style="padding: 0px;margin: 0px;" id="testId" >
+<div class="col" style="padding: 0px;margin: 0px;" id="videoDiv">
     <iframe id="videoFrame" src="vendor/plugin/ptz2/index.html" width="100%"
             style="position: absolute;left:0px;z-index: 100;padding-right:260px;" height="100%"
             frameborder="0" scrolling="no"></iframe>
@@ -67,7 +71,7 @@
 <!-- / main -->
 
 <!-- column -->
-<div class="col w-lg lter b-l" id="toolBar" 
+<div class="col w-lg lter b-l " id="toolBar"
      style="float: right;z-index: 200;position: absolute;right: 0px;"
      ng-controller="RealTimeVideoCtrl" ng-init="playInit()">
     <div class="vbox">

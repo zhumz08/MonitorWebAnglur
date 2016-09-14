@@ -1,5 +1,5 @@
 <!-- hbox layout -->
-<div class="hbox bg-light" style="overflow: hidden;"  ng-init="
+<div class="hbox bg-light"  ng-init="
   app.settings.asideFolded = true;
   app.settings.asideFixed = true;
   app.settings.asideDock = false;
@@ -10,16 +10,16 @@
   <!-- column -->
   <div class="col bg-white">
     <div class="vbox" >
-      <div ng-controller="TabsDemoCtrl">
+      <div ng-controller="TabsDemoCtrl" >
         <tabset class="tab-container">
-          <tab  ng-repeat="tabApp in mainAppTabs">
+          <tab active="tabApp.active" ng-repeat="tabApp in mainAppTabs">
             <tab-heading>
               <span style="font-size: 20px;font-weight: 900;" class="{{tabApp.isMain ? '':'hidden'}}">{{tabApp.title}}</span>
               <span style="font-size: 16px;margin-top: 5px;display: block;"  class="{{tabApp.isMain ? 'hidden':''}}">{{tabApp.title}}
                 <a  ng-click="closeMainTab($index,tabApp)" class="text-warning {{tabApp.close?'':'hidden'}}"><i class="fa fa-close m-l-xs"></i></a>
               </span>
-
             </tab-heading>
+
             <div data-ng-include="tabApp.path"></div>
 
             <!-- column -->
