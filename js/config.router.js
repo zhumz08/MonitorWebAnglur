@@ -533,6 +533,8 @@ angular.module('app')
                 })
 
 
+
+
               .state('monitorweb', {
                   abstract: true,
                   url: '/monitorweb',
@@ -564,6 +566,26 @@ angular.module('app')
                               );
 
                               return uiLoad.load( ['js/controllers/tab.js','js/controllers/tree.js','js/monitorweb/controllers/playvideo.js','js/controllers/signin.js'] );
+                          }]
+                  }
+              })
+              .state('camerastate', {
+                  url: '/camerastate',
+                  templateUrl: 'view/camerastate/camerastate.html',
+                  resolve: {
+                      deps: ['$ocLazyLoad',
+                          function( $ocLazyLoad ){
+                                return $ocLazyLoad.load('js/controllers/camerastate/camera_state.js');
+                          }]
+                  }
+              })
+              .state('camerastateHistory', {
+                  url: '/camerastateHistory',
+                  templateUrl: 'view/camerastate/camerastateHistory.html',
+                  resolve: {
+                      deps: ['$ocLazyLoad',
+                          function( $ocLazyLoad ){
+                                return $ocLazyLoad.load('js/controllers/camerastate/camera_state_history.js');
                           }]
                   }
               })

@@ -1,0 +1,107 @@
+<div ng-controller="CameraStateCtrl" class="hbox hbox-auto-xs bg-light" ng-
+     style="position: absolute;top:0px;left:0px;width: 100%;"
+     ng-init="initCameraState()">
+    <div class="panel panel-default" class="scroll-x">
+        <div class="panel-heading">
+            <i class="fa fa-search"></i>摄相机状态-实时状态查询
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-12">
+                    <form class="form-inline" id="cameraStateForm" role="form">
+                        <div class="form-group wrapper-xs" >
+                            <label>开始时间：</label>
+                            <div class="input-group" ng-controller="DatepickerDemoCtrl">
+                                <input type="text" name="startDay" class="form-control" datepicker-popup="yyyy-MM-dd" ng-model="dt" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="关闭" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </div>
+                            <select class="form-control" name="startHour">
+                                <option ng-repeat="hour in hours" value="{{hour}}">{{hour}}</option>
+                            </select>
+                            <select class="form-control" name="startMinute">
+                                <option ng-repeat="minute in minutes" value="{{minute}}">{{minute}}</option>
+                            </select>
+                            <label class="m-l-lg">结束时间：</label>
+                            <div class="input-group" ng-controller="DatepickerDemoCtrl">
+                                <input type="text" name="endDay" class="form-control" datepicker-popup="yyyy-MM-dd" ng-model="dt" is-open="opened" datepicker-options="dateOptions" ng-required="true" close-text="关闭" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </div>
+                            <select class="form-control" name="endHour">
+                                <option ng-repeat="hour in hours" value="{{hour}}">{{hour}}</option>
+                            </select>
+                            <select class="form-control" name="endMinute">
+                                <option ng-repeat="minute in minutes" value="{{minute}}">{{minute}}</option>
+                            </select>
+                        </div>
+                        <br />
+                        <div class="form-group wrapper-xs" style="width: 300px;" ng-repeat="sel in selectList">
+                            <label>{{sel.name}}：</label>
+                            <select class="form-control" name="{{sel.colname}}">
+                                <option ng-repeat="option in sel.options " value="{{option.value}}">{{option.value}}</option>
+                            </select>
+                        </div>
+                        <div class="row wrapper-xs">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>导出字段：</label>
+                                    <label class="checkbox-inline i-checks" style="width: 90px;">
+                                        <input type="checkbox" ng-model="checkAll" ><i></i>
+                                        {{!checkAll ? "全选":"取消全选"}}
+                                    </label>
+                                    <label class="checkbox-inline i-checks" ng-repeat="chk in chkList" >
+                                        <input type="checkbox" ng-checked="checkAll" name="colname" value="{{chk.colname}}"><i></i>{{chk.name}}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row wrapper" style="padding: 0px 15px 15px 15px;">
+                            <div class="col-sm-3">
+                              <!--  <select class="form-control wrapper-xs">
+                                    <option value="0">所有页</option>
+                                    <option value="1">当前页</option>
+                                    <option value="2">前100条</option>
+                                    <option value="3">前200条</option>
+                                    <option value="4">前500条</option>
+                                    <option value="5">前1000条</option>
+                                </select>
+                                <button class="btn btn-default"><i class="fa fa-download text-info"></i>&nbsp;导出记录&nbsp;</button>-->
+                            </div>
+                            <div class="col-sm-9 text-right">
+                                <button class="btn btn-info" ng-click="doSearch()"><i class="fa fa-search"></i>搜索</button>
+                                <button class="btn btn-info" ng-click="doExportXls()"><i class="fa fa-download"></i>&nbsp;导出记录&nbsp;</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div style="font-size:12px;" class="scroll-x {{ !result.colNameList ? 'hidden':''}}" >
+                <page-select></page-select>
+                <table class="table table-striped table-bordered b-t b-light" id="testTable">
+                    <thead>
+                        <tr>
+                            <th>编号</th>
+                            <th ng-repeat="title in result.colNameList">{{tranTitle(title)}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr  ng-repeat="row in pager.pageList">
+                            <td>{{($index+1) + (pager.pageIndex-1) * pager.pageSize}}</td>
+                            <td ng-repeat="cell in row">{{cell.value}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="text-center">
+                    <pagination first-text="首页" ng-change="pager.pageChanged()" last-text="末页" next-text="下一页"  items-per-page="pager.pageSize"  previous-text="上一页"   total-items="pager.totalNum" ng-model="pager.pageIndex" max-size="12"   class="pagination-sm m-t-none m-b" boundary-links="true" rotate="true" ></pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

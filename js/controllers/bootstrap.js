@@ -281,7 +281,12 @@
   ; 
   app.controller('DatepickerDemoCtrl', ['$scope', function($scope) {
     $scope.today = function() {
-      $scope.dt = new Date();
+      var date = new Date();
+      var year = date.getFullYear();
+      var month = date.getMonth()+1;
+      var day = date.getDate();
+
+      $scope.dt = year + "-"+ month + "-" + day;
     };
     $scope.today();
 
@@ -307,13 +312,13 @@
     };
 
     $scope.dateOptions = {
-      formatYear: 'yy',
+      formatYear: 'yyyy',
       startingDay: 1,
       class: 'datepicker'
     };
 
     $scope.initDate = new Date('2016-15-20');
-    $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+    $scope.formats = ['yyyy-MM-dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
     $scope.format = $scope.formats[0];
   }])
   ; 

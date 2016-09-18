@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="4ee07eea-2372-4e25-b343-9fee2249efff" name="tomcat8" url="http://localhost:8080/MonitorWeb/">
+        <fileTransfer port="0" mountedRoot="F:\Program Files\apache-tomcat-8.0.22\webapps\MonitorWeb\view" accessType="MOUNT" />
+      </webServer>
+    </option>
+  </component>
+</project>

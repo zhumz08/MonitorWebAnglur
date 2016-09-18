@@ -10,8 +10,8 @@ var commonOcxObj = document.getElementById("commonOcx");
 var userKey = null;
 
 angular.module('app')
-  .controller('AppCtrl', ['$scope', '$translate', '$localStorage', '$window', 
-    function(              $scope,   $translate,   $localStorage,   $window ) {
+  .controller('AppCtrl', ['$scope', '$translate', '$localStorage', '$window','mePageLoading',
+    function(              $scope,   $translate,   $localStorage,   $window,mePageLoading) {
       // add 'ie' classes to html
       var isIE = !!navigator.userAgent.match(/MSIE/i);
       isIE && angular.element($window.document.body).addClass('ie');
@@ -44,6 +44,22 @@ angular.module('app')
           container: false
         }
       }
+
+      $scope.showLoad = function(){
+        // 手动调用动画
+        mePageLoading.show('Circle');
+        /* setTimeout(function(){
+         mePageLoading.hide();
+         }, 1500);*/
+      };
+
+      $scope.hideLoad = function(){
+        /* setTimeout(function(){
+         mePageLoading.hide();
+         }, 1500);*/
+        // 手动调用动画
+        mePageLoading.hide();
+      };
 
      // save settings to local storage
       if ( angular.isDefined($localStorage.settings) ) {
@@ -273,7 +289,26 @@ function logout()
      return commonOcxObj.UserLogout(userKey);
    }
  }catch(e){
-   alert("window logout"+e);
+   console.error("window logout"+e);
  }
   return 1;
+}
+
+
+
+function AngularPost($http, url, data, doSuccess, doError) {
+  $http({
+    method: 'POST',
+    url: "/MonitorWeb/web" + url,
+    data: $.param(data),
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+  }).success(function (data) {
+    if (doSuccess) {
+      doSuccess(data);
+    }
+  }).error(function (errOut) {
+    if (doError) {
+      doError(errOut);
+    }
+  });
 }

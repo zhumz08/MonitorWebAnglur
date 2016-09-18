@@ -10319,11 +10319,11 @@ function $LocaleProvider() {
 
       DATETIME_FORMATS: {
         MONTH:
-            'January,February,March,April,May,June,July,August,September,October,November,December'
+            '一月, 二月, 三月, 四月, 五月, 六月, 七月, 八月, 九月, 十月, 十一, 十二'
             .split(','),
         SHORTMONTH:  'Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec'.split(','),
-        DAY: 'Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday'.split(','),
-        SHORTDAY: 'Sun,Mon,Tue,Wed,Thu,Fri,Sat'.split(','),
+        DAY: '星期日,星期一,星期二, 星期三, 星期四, 星期五, 星期六, 星期天'.split(','),
+        SHORTDAY: '日,一,二,三,四,五,六'.split(','),
         AMPMS: ['AM','PM'],
         medium: 'MMM d, y h:mm:ss a',
         'short': 'M/d/yy h:mm a',
