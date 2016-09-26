@@ -1,7 +1,7 @@
 <div class="wrapper" style="width: 300px;float: left;height: 180px;margin-left: 15px;cursor: pointer;"
-     ng-repeat="menu in [{title:'实时视频',pic:'02',path:'view/realtime/tab.html'},{title:'历史回放',pic:'03',close:true}]">
-    <img src="./img/app_menu/monitor_{{menu.pic}}.jpg" ng-click="openMainTab(menu)"  style="width: 300px;height: 180px;"/>
-    <div class="text-center wrapper-xs" style="width: 100%;">
-        <a class="font-bold text-warning">{{menu.title}}</a>
+     ng-repeat="menu in videoMenu">
+    <img src="./img/app_menu/{{menu.pic}}" ng-click="openMainTab(menu)"  style="width: 300px;height: 180px;"/>
+    <div class="text-left wrapper-xs" style="width: 100%;">
+        <a class="text-warning" style="font-size: 18px;">{{menu.title}}</a>
     </div>
 </div>

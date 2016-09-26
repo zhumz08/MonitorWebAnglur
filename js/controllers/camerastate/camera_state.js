@@ -91,8 +91,7 @@ app.controller('CameraStateCtrl', ['$scope','$http','Pager', function($scope,$ht
         "colname": "v_glbm", //数据库字段名
         "options":[
             {"key":-1,"value":"全部"},
-            {"key":1,"value":"aaa"},
-            {"key":2,"value":"aaa"}
+            {"key":00,"value":"交警支队"}
         ]
     });
 

@@ -10,6 +10,12 @@ $(function(){
 });
 
 
+$("#savePicA").click(function ()
+{
+	//savePicture2Local();
+});
+
+
 function hideContentLeft(){
 	try{
 		/*$('#content-left').css('width','15px');

@@ -22,7 +22,7 @@ var node_Children = "children";
  treeObj.addNode("0111","01111","政立路相机01111");
  treeObj.addNode("0211","02111","政立路相机02111");
 
-*/
+ */
 
 function TreeObject(){
 
@@ -53,7 +53,7 @@ TreeObject.prototype = {
             var tmpNode = this.rootNode[i];
 
             //获取组的信息
-           this.addGroupData(tmpNode,dataMap);
+            this.addGroupData(tmpNode,dataMap);
         }
     },
     parseGroupXML:function(groupXML){
@@ -139,7 +139,7 @@ TreeObject.prototype = {
     },
 
     getRootNode: function(){
-      return this.rootNode;
+        return this.rootNode;
     },
 
     addNode: function(subNode){
@@ -147,7 +147,7 @@ TreeObject.prototype = {
     },
 
     appendNode: function(treeId,groupId,groupData) {
-       var groupNode = $("#" + treeId).tree('find', groupId);
+        var groupNode = $("#" + treeId).tree('find', groupId);
         $('#' + treeId).tree('append', {
             parent:groupNode.target,
             data: groupData

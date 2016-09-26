@@ -4,15 +4,17 @@
 
 html {
     background-color: #f0f3f4;
+    overflow: hidden;
 }
 
 body {
-    font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, "微软雅黑",sans-serif;
     font-size: 14px;
     -webkit-font-smoothing: antialiased;
     line-height: 1.42857143;
     color: #58666e;
     background-color: transparent;
+    overflow: hidden;
 }
 
 *:focus {
@@ -353,44 +355,31 @@ a.list-group-item.hover {
 .nav .open > a,
 .nav .open > a:hover,
 .nav .open > a:focus {
-    background-color: #55c3e6;
-}
 
+}
 .nav-tabs {
-    border-bottom: 3px solid #47a3da;
-    border-top: 1px solid #47a3da;
-    box-shadow: inset 2px 0px #47a3da;
-
-    margin: 0px;
-    padding: 0px;
+    background: #f1f5f8;
+    z-index: -1;
+    border-bottom: solid 1px #d4d8db;
 }
 
-.nav-tabs > li {
-    float: left;
-    border: none;
-    margin: 0px;
-    padding: 0px;
+.nav-tabs > li{
 }
 
 .nav-tabs > li > a {
-    margin-bottom: -2px;
-    line-height: 1.42857143;
-    border-radius: 0;
-    border-right: solid 1px #47a3da;
+    border-radius: 1px 1px 0 0;
+    box-shadow: 0 0 2px white;
+    border-bottom: none;
+    border-right: solid 1px #d4d8db;
 }
 
-.nav-tabs > li > a:hover {
-    border-bottom: 1px solid #47a3da;
-}
-
+.nav-tabs > li:hover > a,
 .nav-tabs > li.active > a,
-.nav-tabs > li.active > a:hover,
-.nav-tabs > li.active > a:focus {
-    color: white;
-    cursor: default;
-    background: #47a3da;
-    border: 1px solid #47a3da;
-    border: 1px solid #47a3da;
+.nav-tabs > li.active > a:hover {
+}
+
+.nav-tabs > li.active > a {
+
 }
 
 .nav-tabs-alt .nav-tabs.nav-justified > li {
@@ -3019,7 +3008,7 @@ fieldset[disabled] .i-checks input + i:before {
 
 .bg-dark {
     color: #a6a8b1;
-    background-color: #3a3f51;
+    background-color: #32363f;
 }
 
 .bg-dark.lt,
@@ -3435,7 +3424,11 @@ fieldset[disabled] .i-checks input + i:before {
 
 .bg-info {
     color: #dcf2f8;
-    background-color: #23b7e5;
+    background-color: #2e7cfa;
+}
+
+.bg-info-tools{
+    background: #dfeafc;
 }
 
 .bg-info.lt,
@@ -5432,10 +5425,41 @@ a.text-#000000:hover {
     background: #000;
 }
 
+ul,li,a,span{
+    z-index:1111;
+}
 
 .nav-menu{
-    z-index: 99000000;
+    z-index:1111;
 }
 
 
+
+.app_menu .menuitem:active{
+    border-right: solid 6px orange;
+    color:#fad733;
+}
+
+.app_menu .menuitem{
+    border-right: solid 6px white;
+}
+
+.app_menu .menuitem:hover{
+    border-right: solid 6px orange;
+}
+
+.app_menu a.menuitemselect{
+    border-right: solid 6px orange;
+    color:#fad733;
+}
+
+
+
+.ptz_arrows{
+  width:50px;
+  height:50px;
+}
+.ptz_tools{
+    width:50px;
+}
 

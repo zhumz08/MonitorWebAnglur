@@ -96,3 +96,43 @@ app.controller('RealTimeVideoCtrl', ['$scope', '$http', '$state', function($scop
     }
 
 }]);
+
+
+/**
+ * 主页的Ctrl
+ */
+app.controller('MainMenuCtrl', ['$scope', '$http', '$state', function($scope, $http, $state) {
+
+    $scope.app_menu_url= 'view/app_menu/video_app.html';
+
+    $scope.menuList = [
+        {name:"视频监控",path:"view/app_menu/video_app.html", icon: 'icon_video.png',selected:'true'},
+        {name:"智能分析和检索",path:"view/app_menu/kakou_app.html",icon:'icon_analyse.png'},
+        {name:"数据管理",path:"view/app_menu/face_app.html",icon:'icon_data.png'},
+        {name:"存储管理",path:"view/app_menu/face_app.html",icon:'icon_datastore.png'},
+        {name:"配置管理中心",path:"view/app_menu/face_app.html",icon:'icon_settingmgr.png'},
+        {name:"任务计划管理",path:"view/app_menu/face_app.html",icon:'icon_plan.png'},
+        {name:"管理工具",path:"view/app_menu/face_app.html",icon:'icon_tools.png'},
+        {name:"用户管理",path:"view/app_menu/face_app.html",icon:'icon_usermgr.png'}
+    ];
+
+    $scope.videoMenu = [
+        {title:'实时视频',pic:'menu_realtime.png',path:'view/realtime/tab.html',close:true},
+        {title:'电子地图',pic:'menu_map.png',close:true},
+        {title:'历史视频调用',pic:'menu_history.png',close:true}
+    ];
+
+    /**
+     * 菜单相似
+     * @param v
+     * @param event
+     */
+
+    $scope.changeMenu = function(v,event){
+        $scope.app_menu_url = v.path;
+
+        angular.element(".menuitem").removeClass("menuitemselect");
+        angular.element(event.target).addClass("menuitemselect");
+    }
+
+}]);

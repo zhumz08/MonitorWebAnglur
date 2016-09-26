@@ -10,8 +10,8 @@ var commonOcxObj = document.getElementById("commonOcx");
 var userKey = null;
 
 angular.module('app')
-  .controller('AppCtrl', ['$scope', '$translate', '$localStorage', '$window','mePageLoading',
-    function(              $scope,   $translate,   $localStorage,   $window,mePageLoading) {
+  .controller('AppCtrl', ['$scope', '$translate', '$localStorage', '$window','mePageLoading','$state',
+    function(              $scope,   $translate,   $localStorage,   $window,mePageLoading,$state) {
       // add 'ie' classes to html
       var isIE = !!navigator.userAgent.match(/MSIE/i);
       isIE && angular.element($window.document.body).addClass('ie');
@@ -19,12 +19,12 @@ angular.module('app')
 
       // config
       $scope.app = {
-        name: '平安包头',
+        name: '云南省高速公路收费业务监控系统',
         version: '1.3.3',
         // for chart colors
         color: {
           primary: '#7266ba',
-          info:    '#4fc3f7',
+          info:   '#2e7cfa',  //'#4fc3f7',
           success: '#27c24c',
           warning: '#fad733',
           danger:  '#f05050',
@@ -34,9 +34,9 @@ angular.module('app')
         },
         settings: {
           themeID: 1,
-          navbarHeaderColor: 'bg-info',
-          navbarCollapseColor: 'bg-light-only',
-          asideColor: 'bg-info',
+          navbarHeaderColor: 'bg-dark',
+          navbarCollapseColor: 'bg-info',
+          asideColor: 'bg-dark',
           headerFixed: true,
           asideFixed: false,
           asideFolded: false,
@@ -63,9 +63,9 @@ angular.module('app')
 
      // save settings to local storage
       if ( angular.isDefined($localStorage.settings) ) {
-        $scope.app.settings = $localStorage.settings;
+       //$scope.app.settings = $localStorage.settings;
       } else {
-        $localStorage.settings = $scope.app.settings;
+      //  $localStorage.settings = $scope.app.settings;
       }
       $scope.$watch('app.settings', function(){
         if( $scope.app.settings.asideDock  &&  $scope.app.settings.asideFixed ){
@@ -100,77 +100,135 @@ angular.module('app')
         mainAppTabs.push({title:title,path:path});
       }
 
+
+
+      $scope.userLogout = function(){
+        try{
+          $scope.userInfo = false;
+
+          logout();
+
+          $state.go("access.signin");
+        }catch(e){
+          window.frames["videoFrame"].log.debug("error" + e);
+        }
+
+
+        return;
+        /*  try{
+         var retVal = window.parent.frames['videoFrame'].logout();
+         if(retVal){
+         $scope.userInfo = null;
+         }
+         }catch(e){
+         console.error(e);
+         }*/
+      }
+
+
+      $scope.mainAppTabs = [{
+        title:'应用中心',
+        isMain: true,
+        close: false,
+        path:'view/mainApp.html',
+        active:true
+      }];
+
+
+      $scope.titleMap= { };
+      $scope.openMainTab = function(tab){
+        var idx = $scope.titleMap[tab.title];
+        if(!idx){
+          var idx = $scope.mainAppTabs.push(tab);
+          $scope.titleMap[tab.title] = idx;
+        }else{
+          tab = $scope.mainAppTabs[idx-1];
+        }
+        tab.active = true;
+      }
+
+      $scope.closeMainTab = function (idx,tab) {
+        $scope.titleMap[tab.title] = false;
+
+        $scope.mainAppTabs.splice(idx,1);
+      }
+
     }]);
 
 
 
-function OnSDKMessageEvent(lMsgType, strContent) {
-  switch (lMsgType) {
-      //心跳
-    case 0x0000: {
-      // log.debug("回调事件. 心跳   类型："+lMsgType);
-      return;
-    }
-      //返回登录信息
-    case 0x0002: {
-     // alert("strConent:" + strContent);
-      //console.debug("login:" + strContent);
-      returnLogin(strContent);
-      break;
-    }
-      //收到某一个摄像机关联的Host信息---实时播放回调
-    case 1541: {
-      // log.debug("回调事件. 收到某一个摄像机关联的Host信息   类型："+lMsgType);
-      var videoFrame = window.frames["videoFrame"];
-      videoFrame.returnStartLive(getXMLDoc(strContent));
-      break;
-    }
-    case 1550: // 历史视频播放 调用StartVod 返回结果
-    {
-      //log.debug("回调事件. 播放视频   类型："+lMsgType);
-      returnStartVod(strContent);
-      break;
-    }
-    case 1553: //  通知时间线信息
-    {
-      //log.debug("视频播放时间线事件：" + strContent);
-      try {
-        var xmlDoc = getXMLDoc(strContent);
-        var elements = xmlDoc.getElementsByTagName("uiPosition");
-        var curTime = parseInt(elements[0].firstChild.nodeValue);
-        //top.mainPage.timeLineObj.SetPlayTimeShow(curTime);
-        timeLineObj.SetPlayTimeShow(curTime);
-      }
-      catch (e) {
-      }
-      break;
-    }
-    case 1564: // 摄像机组信息列表
-    {
-      //log.debug("获取摄像机组信息   类型：" + lMsgType);
-      var videoFrame = window.frames["videoFrame"];
-      videoFrame.returnGetCarmGroupList(getXMLDoc(strContent));
-      break;
-    }
-      // 返回实时摄像机列表
-    case 1566: {
-      //log.debug("获取摄像机列表   类型：" + lMsgType);
-      //treeObj.parseGroupXML(strContent);
-      alert(strContent);
-      var videoFrame = window.frames["videoFrame"];
-      videoFrame.returnGetCarmList(getXMLDoc(strContent));
 
-      break;
-    }
+function OnSDKMessageEvent(lMsgType, strContent) {
+  try{
+   // alert(lMsgType +"  "+ strContent);
+    switch (lMsgType) {
+      //心跳
+      case 0x0000: {
+        // log.debug("回调事件. 心跳   类型："+lMsgType);
+        return;
+      }
+      //返回登录信息
+      case 0x0002: {
+       // alert("strConent:" + strContent);
+        var videoFrame = window.frames["videoFrame"].log.debug("登录:" + strContent);
+        returnLogin(strContent);
+        break;
+      }
+      //收到某一个摄像机关联的Host信息---实时播放回调
+      case 1541: {
+        // log.debug("回调事件. 收到某一个摄像机关联的Host信息   类型："+lMsgType);
+        var videoFrame = window.frames["videoFrame"];
+        videoFrame.returnStartLive(getXMLDoc(strContent));
+        break;
+      }
+      case 1550: // 历史视频播放 调用StartVod 返回结果
+      {
+        //log.debug("回调事件. 播放视频   类型："+lMsgType);
+        returnStartVod(strContent);
+        break;
+      }
+      case 1553: //  通知时间线信息
+      {
+        //log.debug("视频播放时间线事件：" + strContent);
+        try {
+          var xmlDoc = getXMLDoc(strContent);
+          var elements = xmlDoc.getElementsByTagName("uiPosition");
+          var curTime = parseInt(elements[0].firstChild.nodeValue);
+          //top.mainPage.timeLineObj.SetPlayTimeShow(curTime);
+          timeLineObj.SetPlayTimeShow(curTime);
+        }
+        catch (e) {
+        }
+        break;
+      }
+      case 1564: // 摄像机组信息列表
+      {
+        window.frames["videoFrame"].log.debug("获取摄像机组信息   类型：" + lMsgType);
+        var videoFrame = window.frames["videoFrame"];
+        videoFrame.returnGetCarmGroupList(getXMLDoc(strContent));
+        break;
+      }
+      // 返回实时摄像机列表
+      case 1566: {
+        //log.debug("获取摄像机列表   类型：" + lMsgType);
+        //treeObj.parseGroupXML(strContent);
+        var videoFrame = window.frames["videoFrame"];
+        videoFrame.returnGetCarmList(getXMLDoc(strContent));
+
+        break;
+      }
       // 返回某一路摄像机历史记录
-    case 1568: {
-      log.debug("回调事件. 返回相机历史记录   类型：" + lMsgType);
-      returnGetCamHisVideo(strContent);
-      break;
+      case 1568: {
+        log.debug("回调事件. 返回相机历史记录   类型：" + lMsgType);
+        returnGetCamHisVideo(strContent);
+        break;
+      }
+      default:
+        //log.debug("信息类型:"+lMsgType + "信息内容:"+ strContent);
+        break;
     }
-    default:
-      //log.debug("信息类型:"+lMsgType + "信息内容:"+ strContent);
-      break;
+  }catch(e){
+    window.frames["videoFrame"].log.debug("Error errr" + e);
   }
 }
 
@@ -226,7 +284,7 @@ function returnLogin(content)
      // $("#logindiv").dialog("open");
    }
  }catch(e){
-   alert("ERROR" + e);
+   window.frames["videoFrame"].log.debug("ERROR" + e);
  }
 }
 
@@ -250,7 +308,7 @@ function getXMLDoc(xmlString)
     catch (e)
     {
       // log.warn(e);
-      alert("Error"+e);
+      window.frames["videoFrame"].log.debug("Error"+e);
     }
   }
 }
@@ -293,7 +351,6 @@ function logout()
  }
   return 1;
 }
-
 
 
 function AngularPost($http, url, data, doSuccess, doError) {

@@ -1,33 +1,38 @@
-<div class="container w-full h-auto" ng-controller="SigninFormController">
-  <div style="height: 700px;background: url('./view/img/login.jpg');max-width: 1920px;top:50%;position: relative;"
-       class="container wrapper-lg w-full">
-    <div  style="float:right;background: rgba(245,248,255,0.8);box-shadow: 0 0 23px gray;width:400px;height: 400px;
+<div class="pos-abt w-full h-full bg-white"  style="float: left;">
+    <div class="pos-fix w-full h-auto bg-white" style="top:50%; margin-top: -451px;" ng-controller="SigninFormController"
+         ng-init="app.settings.headerFixed = false;">
+        <div style="background: url('./img/yunnan/main/login_bg.png');max-width: 1927px; height: 846px;"
+             class="container wrapper-lg w-full">
+            <div  style="float:right;background: rgba(245,248,255,0.8);box-shadow: 0 0 23px gray;width:448px;height: 446px;
   border-radius: 5px; margin-top: 5%;" >
-      <div class="wrapper-lg">
-        <a href class="navbar-brand block m-t text-warning">{{app.name}}</a>
-        <div class="m-b-lg">
-          <div class="wrapper text-center">
-          </div>
-          <form name="form" class="form-validation">
-            <div class="text-danger wrapper text-center" ng-show="authError">
-              {{authError}}
+                <div class="wrapper-lg">
+                    <a href class="navbar-brand block m-t" style="font-size:20px;color:#ff712b;">{{app.name}}</a>
+                    <div style="margin-left: 15px;">
+                        <div class="wrapper text-center">
+                        </div>
+                        <form name="form" class="form-horizontal">
+                            <div class="text-danger wrapper text-center" ng-show="authError">
+                                {{authError}}
+                            </div>
+                            <label class="control-label" style="font-size: 16px;">账号：</label>
+                            <input placeholder="用户名" class="form-control"  style="font-size: 18px;height: 50px;width: 350px;border-radius: 3px;" ng-model="user.email" required>
+                            <label class="control-label" style="font-size: 16px;">密码：</label>
+                            <input type="password" placeholder="密码" style="font-size: 18px;height: 50px;width: 350px;border-radius: 3px;" class="form-control" ng-model="user.password" required>
+                            <br />
+                            <button type="submit" style="background: #FF712B;width:352px;height: 54px;border-radius: 5px;" class="btn btn-lg btn-warning btn-block" ng-click="userLogin()"
+                                    ng-disabled='form.$invalid'>登录</button>
+                        </form>
+                        <br />
+                    </div>
+                </div>
             </div>
-            <div class="list-group list-group-sm">
-              <div class="list-group-item">
-                <input placeholder="用户名" class="form-control no-border" ng-model="user.email" required>
-              </div>
-              <div class="list-group-item">
-                <input type="password" placeholder="密码" class="form-control no-border" ng-model="user.password" required>
-              </div>
-            </div>
-            <button type="submit" style="background: #FF712B;" class="btn btn-lg btn-warning btn-block" ng-click="userLogin()"
-                    ng-disabled='form.$invalid'>登录</button>
-            <div class="text-center m-t m-b"><a>忘记密码?</a></div>
-            <div class="line line-dashed"></div>
-          </form>
         </div>
-      </div>
     </div>
-  </div>
+    <div style="height: 58px; bottom: 0;width:100%; position: fixed;text-align: center;">
+        <p>
+            <small class="text-dark">
+                <p>Copyright&nbsp;@&nbsp;2016-2017&nbsp;&nbsp;版权所有&nbsp;闵ICP备14006474号&nbsp;&nbsp;意见建议：</p>
+            </small>
+        </p>
+    </div>
 </div>
-<div class="text-center" ng-include="'view/blocks/page_footer.html'"></div>

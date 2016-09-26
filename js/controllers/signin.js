@@ -41,6 +41,8 @@ app.controller('SigninFormController', ['$scope', '$http', '$state','$rootScope'
             var r = commonOcxObj.ConnectToServer(userKey, $scope.user.hostName, $scope.user.hostPort);
             if(r==0){
                 var retVal = commonOcxObj.UserLogin(userKey, $scope.user.userName, $scope.user.userPwd);
+               /// alert("retVal:" + retVal);
+
                 if(retVal==0){
                     $("#loginDiv").addClass("hidden");
                     $("#videoDiv").removeClass("hidden");
@@ -48,7 +50,8 @@ app.controller('SigninFormController', ['$scope', '$http', '$state','$rootScope'
                 }
             }
         }catch(e){
-            $scope.authError = "login error" + e;
+            ///alert("EEEEEEE" + e);
+          $scope.authError = "login error" + e;
         }
 
 

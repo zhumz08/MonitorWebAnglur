@@ -13,8 +13,8 @@
 	position: relative;
 	width: 100%;
 	overflow: hidden;
-	margin: 5px;
 	font-weight: 200;
+	margin-top: 15px;
 }
 
 /* Nav */
@@ -30,19 +30,26 @@
 }
 
 .tabs nav ul li {
-	border: 1px solid #becbd2;
-	border-bottom: none;
-	margin: 0 0.25em;
 	display: block;
 	float: left;
+	padding: 0px 15px 15px 15px;
 	position: relative;
 }
 
 .tabs nav li.tab-current {
-	border: 1px solid #47a3da;
-	box-shadow: inset 0 2px #47a3da;
-	border-bottom: none;
-	z-index: 100;
+	padding:0;
+}
+
+.tabs nav li span{
+	display:block;
+	font-size:25px;
+}
+
+.tabs nav li.tab-current span{
+	display:block;
+	padding: 0px 15px 5px 15px;
+	font-size:25px;
+	border-bottom: solid 5px #fe712c;
 }
 
 .tabs nav li.tab-current:before,
@@ -65,9 +72,7 @@
 .tabs nav a {
 	color: #becbd2;
 	display: block;
-	font-size: 1.45em;
-	line-height: 2.5;
-	padding: 0 1.25em;
+	font-size: 25px;
 	white-space: nowrap;
 }
 
@@ -77,6 +82,9 @@
 
 .tabs nav li.tab-current a {
 	color: #47a3da;
+	border: none;
+	font-size: 25px;
+	border-bottom: 1px solid #47a3da;
 }
 
 /* Icons */

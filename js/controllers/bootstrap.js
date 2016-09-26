@@ -111,7 +111,7 @@
     };
   }])
   ; 
-  app.controller('ModalDemoCtrl', ['$scope', '$modal', '$log','$rootScope', function($scope, $modal, $log,$rootScope) {
+  app.controller('ModalDemoCtrl', ['$scope', '$modal', '$log','$rootScope','$state', function($scope, $modal, $log,$rootScope,$state) {
     $scope.items = ['item1', 'item2', 'item3'];
     $scope.open = function (size) {
       $("#videoFrame").css("display","none");
@@ -135,21 +135,7 @@
     };
 
 
-    $scope.userLogout = function(){
-      $rootScope.userInfo = false;
 
-      window.frames["videoFrame"].logout();
-
-      return;
-    /*  try{
-        var retVal = window.parent.frames['videoFrame'].logout();
-        if(retVal){
-          $scope.userInfo = null;
-        }
-      }catch(e){
-        console.error(e);
-      }*/
-    }
 
   }])
   ; 
@@ -220,22 +206,6 @@
       { title:'Dynamic Title 2', content:'Dynamic content 2', disabled: true }
     ];
 
-    $scope.mainAppTabs = [{
-      title:'应用中心',
-      isMain: true,
-      close: false,
-      path:'view/mainApp.html',
-      active:true
-    }];
-
-    $scope.openMainTab = function(tab){
-      tab.active = true;
-      $scope.mainAppTabs.push(tab);
-    }
-
-    $scope.closeMainTab = function (idx,tab) {
-      $scope.mainAppTabs.splice(idx,1);
-    }
 
 
 

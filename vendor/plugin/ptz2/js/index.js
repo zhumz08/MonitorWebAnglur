@@ -347,14 +347,13 @@ function logout()
 		window.frames["realTimeTreeFrame"].logout();
 		return 1;
 	}catch(e){
-		alert("error realtime" + e);
+		log.debug("error realtime" + e);
 	}
 }
 
 //登陆事件
 function login(userParam)
 {
-	alert(userParam);
 	var userName = null;
 	var userPwd = null;
 	var hostName = null;
@@ -529,10 +528,10 @@ function returnGetCarmGroupList(content) {
 
 		//获取摄像头组后接着获取摄像头
 		//alert(userKey);
-		alert("window.parent.commonOcxObj" + window.parent.commonOcxObj);
+		//alert("window.parent.commonOcxObj" + window.parent.commonOcxObj);
 		window.parent.commonOcxObj.GetCamera(window.parent.userKey);
 	}catch(e){
-		alert("error  returnGetCarmGroupList"+e);
+		log.debug("error  returnGetCarmGroupList"+e);
 	}
 
 }
@@ -660,7 +659,7 @@ function playCarmVideo(cameraId)
 		var playStreamType = 0; //0: 自动分配码流; 1: 码流1; 2: 码流2;  3: 码流3
 		commonOcxObj.startLive(window.parent.userKey, cameraId, currCameraId, versionId, playType, reviceIpAddr, revicePort, playStreamType);
 	}catch(e){
-		alert(" Camera error" + e);
+		log.debug(" Camera error" + e);
 	}
 }
 
@@ -701,7 +700,7 @@ function returnStartLive(content)
 		// 调用实时播放页面播放方法
 		startRealPlay(palyAddr, playPort, playType, wndId, window.parent.userKey);
 	}catch (e){
-		alert("Play Real " + e);
+		log.debug("Play Real " + e);
 	}
 }
 

@@ -37,18 +37,18 @@
                 <div id="tabs" class="tabs">
                         <nav>
                             <ul>
-                                <li><a href="#section-1" ><span>监控</span></a></li>
-                                <li><a href="#section-2" ><span>卡口</span></a></li>
+                                <li><a href="#section-1" ><span style="font-size: 18px;">监控</span></a></li>
+                                <li><a href="#section-2" ><span style="font-size: 18px;">卡口</span></a></li>
                             </ul>
                         </nav>
                         <div class="content">
                             <section id="section-1">
                                 <div style="height: 45px;padding: 5px;">
                                     <div class="input-group">
-                                        <input type="text" onkeyup="window.frames['realTimeTreeFrame'].getFind(this.value);" class="form-control input-sm no-bg b-a no-border rounded padder" placeholder="请输入要搜索的内容...">
                                         <span class="input-group-btn">
-                                            <button type="submit" id="searchBtn" class="btn btn-sm bg-white b-a rounded"><i class="fa fa-search text-info"></i></button>
+                                            <button type="submit" id="searchBtn" style="background:#f1f5f8;height: 35px; width: 35px;" class="btn btn-xs rounded"><i class="fa fa-search text-info"></i></button>
                                         </span>
+                                        <input type="text" onkeyup="window.frames['realTimeTreeFrame'].getFind(this.value);" style="background:#f1f5f8;height: 35px;"  class="form-control input-xs no-border rounded padder" placeholder="请输入要搜索的内容...">
                                     </div>
                                 </div>
                                 <div class="show turn" style="display: block;">
@@ -234,7 +234,7 @@
                     <a title="停止直播" id="stopLiveA" onclick="stopLive()" class="icons-right-bg play play-13"></a>
                     <a title="服务器录像" id="hisVideoA" name="start" class="icons-right-bg play play-14"></a>
                     <!--<a title="停止服务器录像" id="stopliveA" class="icons-right-bg play play-15"></a>-->
-                    <a title="截屏" id="savePicA" class="icons-right-bg play play-16"></a>
+                    <a title="截屏" id="savePicA"  onclick="stopLive()" class="icons-right-bg play play-16"></a>
                     <a title="显示隐藏工具栏" id="toolId" class="fa  fa-angle-double-up fa-2x"
                        style="float: right;padding:2px; margin-right: 20px;" onclick="hideToolInfo()"></a>
                     <!--<a title="停止巡检" class="icons-right-bg play play-17"></a>

@@ -4,23 +4,14 @@
   app.settings.container = false;
   app.hideAside = false;
   app.hideFooter = false;
-  app_menu_url= 'view/app_menu/video_app.html';
-  ">
+  " ng-controller="MainMenuCtrl">
     <div class="col w-md w-auto-xs bg-light lter b-r">
         <div>
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    功能列表
-                </div>
-                <div class="list-group bg-white">
-                    <a href class="list-group-item" ng-click="app_menu_url='view/app_menu/video_app.html'">
-                        <i class="glyphicon glyphicon-facetime-video text-info m-r-sm"></i>视频监控应用
-                    </a>
-                    <a href class="list-group-item" ng-click="app_menu_url='view/app_menu/kakou_app.html'">
-                        <i class="fa fa-car text-success m-r-sm"></i>电警卡口应用
-                    </a>
-                    <a href class="list-group-item" ng-click="app_menu_url='view/app_menu/face_app.html'">
-                        <i class="fa fa-user text-primary m-r-sm"></i>人像识应用
+            <div class="no-border" style="border-bottom: none;">
+                <div class="app_menu" style="border:none;margin-top: 25px;">
+                    <a href ng-repeat="v in menuList"  class="wrapper-sm text-warning text-lg text-right menuitem {{v.selected ? 'menuitemselect':''}}" style="display: block;"
+                       ng-click="changeMenu(v,$event)">
+                        {{v.name}}<img class="m-l-sm m-r-sm" src="img/yunnan/menu/icon/{{v.icon}}" />
                     </a>
                 </div>
             </div>
@@ -35,4 +26,7 @@
             </div>
         </div>
     </div>
+</div>
+
+<div data-ng-include=" 'tpl/blocks/settings.html' " class="settings panel panel-default">
 </div>

@@ -11,7 +11,7 @@ app.controller('AbnTestController', function($scope, $timeout) {
             var groupId = branch.groupId;
             var currCameraId = groupId.substring(1,groupId.length);
 
-            $("#roadPicId").attr("src","img/roadpic/" + currCameraId+".jpg");
+            $("#roadPicId").attr("src","img/roadpic/" + currCameraId+".png");
             window.frames["videoFrame"].currCameraId = currCameraId;
             window.frames["videoFrame"].playCarmVideo(currCameraId);
         }catch(e){

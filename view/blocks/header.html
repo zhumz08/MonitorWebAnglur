@@ -19,17 +19,18 @@
       <!-- / navbar header -->
 
       <!-- navbar collapse -->
-      <div class="collapse pos-rlt navbar-collapse box-shadow {{app.settings.navbarCollapseColor}}">
+      <div class="collapse pos-rlt navbar-collapse  {{app.settings.navbarCollapseColor}}">
         <!-- buttons -->
-        <div class="nav navbar-nav hidden-xs">
-        <a href class="btn no-shadow navbar-btn" ng-click="app.settings.asideFolded = !app.settings.asideFolded">
-          <i class="fa {{app.settings.asideFolded ? 'fa-indent' : 'fa-dedent'}} fa-fw text-info"></i>
-        </a>
-      <!--  <a href class="btn no-shadow navbar-btn" ui-toggle-class="show" target="#aside-user">
+        <!--<div class="nav navbar-nav hidden-xs">
+          <a href class="btn no-shadow navbar-btn" ng-click="app.settings.asideFolded = !app.settings.asideFolded">
+            <i class="fa {{app.settings.asideFolded ? 'fa-indent' : 'fa-dedent'}} fa-fw text-info"></i>
+          </a>
+        &lt;!&ndash;  <a href class="btn no-shadow navbar-btn" ui-toggle-class="show" target="#aside-user">
           <i class="icon-user fa-fw"></i>
-        </a>-->
-      </div>
-        <!-- / buttons -->
+        </a>&ndash;&gt;
+        </div>-->
+
+        <div class="nav navbar-nav hidden-xs"><span style="font-size:24px;padding: 10px;display: block;" class="text-white">{{app.name}}</span></div>
 
         <!-- link and dropdown -->
 <!--
@@ -163,23 +164,11 @@
         </ul>
 -->
         <!-- / link and dropdown -->
-
         <!-- search form -->
-        <form class="navbar-form navbar-form-sm navbar-left shift" ui-shift="prependTo" target=".navbar-collapse" role="search" ng-controller="TypeaheadDemoCtrl">
-          <div class="form-group">
-            <div class="input-group">
-              <input type="text" ng-model="selected" typeahead="state for state in states | filter:$viewValue | limitTo:24" class="form-control input-sm no-bg b-a b-info rounded padder" placeholder="请输入搜索内容...">
-              <span class="input-group-btn">
-                <button type="submit" class="btn btn-sm bg-info rounded"><i class="fa fa-search"></i></button>
-              </span>
-            </div>
-          </div>
-        </form>
         <!-- / search form -->
-
-
         <!-- nabar right -->
         <ul class="nav navbar-nav navbar-right">
+
           <!--<li class="text-center">
             <div class="btn-group ">
               <a class="block text-info-dk" title="注销">
@@ -202,7 +191,7 @@
               </a>
             </div>&ndash;&gt;
           </li>-->
-          <li class="dropdown hidden-sm" is-open="lang.isopen" dropdown>
+          <li class="dropdown hidden" is-open="lang.isopen" dropdown>
             <a href class="dropdown-toggle" dropdown-toggle>
               {{selectLang}} <b class="caret"></b>
             </a>
@@ -256,7 +245,8 @@
             &lt;!&ndash; / dropdown &ndash;&gt;
           </li>
 -->
-          <li class="dropdown" dropdown ng-controller="ModalDemoCtrl">
+
+          <li class="dropdown hidden" dropdown ng-controller="ModalDemoCtrl">
               <script type="text/ng-template" id="myModalContent.html">
                 <div ng-include="'tpl/modal.html'" ></div>
               </script>
@@ -305,9 +295,46 @@
             &nbsp;
           </li>
 
+          <li>
+            <a title="设置">
+              <i class="fa fa-gear text-white fa-lg"></i>
+            </a>
+          </li>
+          <li>
+            <a title="信息">
+              <i class="fa fa-comments text-white fa-lg"></i>
+            </a>
+          </li>
+          <li>
+            <a title="帮助">
+              <i class="fa fa-question-circle text-white fa-lg"></i>
+            </a>
+          </li>
+          <li>
+            <a title="安全退出" ng-click="userLogout()">
+              <i class="fa fa-sign-out text-white fa-lg"></i>
+            </a>
+          </li>
+
+          <li class="m-r-xxl">
+            &nbsp;
+          </li>
         </ul>
         <!-- / navbar right -->
 
-      </div>
-      <!-- / navbar collapse -->
 
+        <div  class="nav navbar-nav navbar-right hidden-xs">
+          <form class="navbar-form navbar-form-sm navbar-left shift" ui-shift="prependTo" target=".navbar-collapse" role="search" ng-controller="TypeaheadDemoCtrl">
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <button type="submit" style="height: 35px;background: #3399ff;" class="btn btn-sm rounded"><i class="fa fa-search text-white"></i></button>
+                </span>
+                <input type="text" ng-model="selected" style="width:300px;height: 35px;background: #3399ff;"
+                       class="form-control input-md bg-black rounded no-border text-white"  placeholder="请输入需要搜索的内容">
+              </div>
+            </div>
+          </form>
+        </div>
+        <!-- / navbar collapse -->
+    </div>
