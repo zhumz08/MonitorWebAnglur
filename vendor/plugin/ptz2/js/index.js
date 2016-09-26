@@ -60,27 +60,28 @@ $(function(){
  * 	//初始化实时视频播放工具栏
  */
 function initRealToolBar(){
+	var iconPath = "../../../img/yunnan/menu/ptz/";
+
 	//PTZ操作
 	$(".screenlink").mousedown(function(){
 		var btnName = $(this).attr("btnName");
-		$(this).find("img").attr("src","images/screen/"+btnName+"-click.png");
+		$(this).find("img").attr("src",iconPath+btnName+".png");
 	}).mouseup(function(){
 		var btnName = $(this).attr("btnName");
 	});
 
 	$(".screenlink").hover(function(){
 		var btnName = $(this).attr("btnName");
-		$(this).removee
-		$(this).find("img").attr("src","images/screen/"+btnName+"-black.png");
+		$(this).find("img").attr("src",iconPath+btnName+".png");
 	}, function(){
 		var btnName = $(this).attr("btnName");
-		$(this).find("img").attr("src","images/screen/"+btnName+"-default.png");
+		$(this).find("img").attr("src",iconPath+btnName+".png");
 	})
 
 	$(".screenlink").each(function(){
 		var btnName = $(this).attr("btnName");
 		if($(this).find("img").length == 0){
-			$(this).append("<img class='screenimg' src='images/screen/"+btnName+"-default.png' />");
+			$(this).append("<img class='screenimg' src='" + iconPath+btnName+".png' />");
 		}
 	});
 

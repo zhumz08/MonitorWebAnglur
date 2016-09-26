@@ -1,5 +1,5 @@
 <!-- list -->
-<ul class="nav" id="meunUl">
+<ul class="nav" id="meunUl" ng-controller="NavMenuCtrl" ng-init="doInit();">
   <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
     <span>视频监控</span>
   </li>
@@ -9,7 +9,7 @@
                 <i class="fa fa-fw fa-angle-right text"></i>
                 <i class="fa fa-fw fa-angle-down text-active"></i>
             </span>
-            <i class="icon icon-social-youtube" style="font-size: 25px;"></i>
+            <img btnName="realvideo" style="margin-top: 10px;" />
             <span class="font-bold">实时视频</span>
         </a>
 <!--
@@ -45,7 +45,7 @@
 -->
     </li>
     <li>
-        <a href class="auto" title="智能分析检索">
+        <a href class="auto" title="智能分析检索" ng-click="openMainTab({title:'智能分析检索',pic:'menu_realtime.png',path:'',close:true})">
             <span class="pull-right text-muted">
                 <i class="fa fa-fw fa-angle-right text"></i>
                 <i class="fa fa-fw fa-angle-down text-active"></i>
@@ -53,7 +53,7 @@
 <!--
             <i class="fa fa-user icon "></i>
 -->
-            <i class="icon icon-disc" style="font-size: 25px;"></i>
+            <img btnName="realface" style="margin-top: 10px;" />
             <span class="font-bold" >智能分析检索</span>
         </a>
 <!--
@@ -84,13 +84,13 @@
     </li>
 
     <li>
-        <a href class="auto">
+        <a href class="auto"  ng-click="openMainTab({title:'大屏幕',pic:'menu_realtime.png',path:'',close:true})">
             <span class="pull-right text-muted">
                 <i class="fa fa-fw fa-angle-right text"></i>
                 <i class="fa fa-fw fa-angle-down text-active"></i>
             </span>
             <i class="icon icon-screen-desktop" style="font-size: 25px;"></i>
-            <span class="font-bold" >智能分析检索</span>
+            <span class="font-bold" >大屏幕</span>
         </a>
 <!--
         <ul class="nav nav-sub dk nav-menu">

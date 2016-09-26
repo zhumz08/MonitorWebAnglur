@@ -2576,18 +2576,19 @@
   z-index: -1;
 
 }
+
 .tree li {
   white-space: nowrap;
   z-index: -1;
-
 }
+
 .tree li ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
   z-index: -1;
-
 }
+
 .tree-node {
   height: 18px;
   z-index: -1;
@@ -2692,7 +2693,8 @@
   background: url('images/tree_icons.png') no-repeat -240px -18px;
 }
 .tree-title {
-  font-size: 12px;
+  font-size: 16px;
+  font-family: "微软雅黑", "宋体";
   display: inline-block;
   text-decoration: none;
   vertical-align: top;

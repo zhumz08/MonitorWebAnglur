@@ -357,6 +357,8 @@ a.list-group-item.hover {
 .nav .open > a:focus {
 
 }
+
+
 .nav-tabs {
     background: #f1f5f8;
     z-index: -1;
@@ -376,10 +378,11 @@ a.list-group-item.hover {
 .nav-tabs > li:hover > a,
 .nav-tabs > li.active > a,
 .nav-tabs > li.active > a:hover {
+    color:orange;
 }
 
 .nav-tabs > li.active > a {
-
+    color:orange;
 }
 
 .nav-tabs-alt .nav-tabs.nav-justified > li {
@@ -395,6 +398,7 @@ a.list-group-item.hover {
 }
 
 .nav-tabs-alt .nav-tabs > li.active > a {
+    color:orange;
     border-bottom-color: #23b7e5 !important;
 }
 
@@ -4818,6 +4822,10 @@ a.text-#000000:hover {
     width: 280px;
 }
 
+.w-tool-bar{
+    width: 246px;
+}
+
 .w-xl {
     width: 320px;
 }
@@ -5394,12 +5402,12 @@ a.text-#000000:hover {
 
 /*** NEWＰＴＺ　*/
 .ptzimg {
-    width: 30px;
-    height: 30px;
+    width: 48px;
+    height: 33px;
 }
 
 .ptzothers {
-    width: 35px;
+    width: 30px;
 }
 
 .main-tab-title {
@@ -5456,8 +5464,8 @@ ul,li,a,span{
 
 
 .ptz_arrows{
-  width:50px;
-  height:50px;
+  width:20px;
+  height:20px;
 }
 .ptz_tools{
     width:50px;

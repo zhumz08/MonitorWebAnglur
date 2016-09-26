@@ -1,6 +1,7 @@
 /**
  * Created by mjang on 2016/8/27.
  */
+var ptzIconPath = "img/yunnan/menu/ptz/";
 
 app.controller('RealTimeVideoCtrl', ['$scope', '$http', '$state', function($scope, $http, $state) {
     $scope.videoPosition = 1; //相机预置位
@@ -48,11 +49,12 @@ app.controller('RealTimeVideoCtrl', ['$scope', '$http', '$state', function($scop
 
     ///实时播放ptz
     $scope.playInit = function(){
+
         //PTZ操作
         $(".ptzlink").mousedown(function()
         {
             var btnName = $(this).attr("btnName");
-            $(this).find("img").attr("src","img/PTZ/"+btnName+"-click.png");
+            $(this).find("img").attr("src",ptzIconPath+btnName+".png");
 
             // alert($(this).attr('name'));
             window.frames["videoFrame"].PTZOperator($(this).attr('name'), 'down');
@@ -63,16 +65,15 @@ app.controller('RealTimeVideoCtrl', ['$scope', '$http', '$state', function($scop
 
         $(".ptzlink").hover(function(){
             var btnName = $(this).attr("btnName");
-            $(this).find("img").attr("src","img/PTZ/"+btnName+"-black.png");
+            $(this).find("img").attr("src",ptzIconPath+btnName+".png");
         }, function(){
             var btnName = $(this).attr("btnName");
-            $(this).find("img").attr("src","img/PTZ/"+btnName+"-default.png");
+            $(this).find("img").attr("src",ptzIconPath+btnName+".png");
         })
-
 
         $(".ptzlink").each(function(){
             var btnName = $(this).attr("btnName");
-            $(this).find("img").attr("src","img/PTZ/"+btnName+"-default.png");
+            $(this).find("img").attr("src",ptzIconPath+btnName+".png");
         });
 
     }
@@ -133,6 +134,36 @@ app.controller('MainMenuCtrl', ['$scope', '$http', '$state', function($scope, $h
 
         angular.element(".menuitem").removeClass("menuitemselect");
         angular.element(event.target).addClass("menuitemselect");
+    }
+
+}]);
+
+/**
+ *
+ */
+app.controller('NavMenuCtrl', ['$scope', '$http', '$state', function($scope, $http, $state) {
+
+    $scope.doInit = function(){
+
+        $("#meunUl").find("a").each(function(){
+            var img = $(this).find("img");
+            var iconName = img.attr("btnName");
+            img.attr("src",ptzIconPath + iconName + "-default.png");
+        });
+
+        $("#meunUl").find("a").click(function(){
+            $("#meunUl").find("a").each(function(){
+                var img = $(this).find("img");
+                var iconName = img.attr("btnName");
+                img.attr("src",ptzIconPath + iconName + "-default.png");
+            });
+
+            var img = $(this).find("img");
+            var iconName = img.attr("btnName");
+            img.attr("src",ptzIconPath + iconName + "-click.png");
+        });
+
+
     }
 
 }]);

@@ -30,7 +30,7 @@ li {
 }
 #info-bar {
 	height:69px;
-	border:1px solid #23b7e5;
+	border:1px solid #d6d6d6;
 }
 #content {
 	height:100%;
@@ -457,18 +457,17 @@ li {
 }
 
 .screenimg{
-	width:34px;
-	height: 24px;
-	margin-top: 2px;
+	height: 16px;
+	margin-top: 5px;
 	line-height:0px;
-	padding-left:5px;
+	padding-left:16px;
 }
 
 #play-about {
-	background: none repeat scroll 0 0 rgba(194, 229, 217, 0.26);
+	background: #E6E9ED;
 	bottom: 0;
 	clear: both;
-	height: 30px;
+	height: 26px;
 	position:absolute;
 	width: 100%;
 }
@@ -637,14 +636,11 @@ li {
 	width:100%;
 	overflow:auto;
 	overflow-x:hidden;
-	border:1px solid #23b7e5;
 }
 .li_log {
-	border-bottom:1px solid #23b7e5;
+	border-bottom:1px solid #d6d6d6;
 	display:block;
-	height:14px;
-	line-height:14px;
-	padding-left:5px;
+	padding:2px;
 	width:100%;
 }
 .red {
