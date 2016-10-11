@@ -31,6 +31,7 @@ function TreeObject(){
 TreeObject.prototype = {
     rootNode:[],
     jsonData: null,
+    groupXML:null,
 
     /**
      *  json[{groupId:2,parentId:1,name:'aa'},{groupId:2,parentId:1,name:'bb'}]
@@ -41,14 +42,17 @@ TreeObject.prototype = {
     },
     transData: function(dataMap){
         ///先添加根节点
-        var rootNode = dataMap[0];
+        ///var rootNode = dataMap[0];
+        var rootNode ;
         if(rootNode==null){
-            rootNode = [{"id":"1","text":"相机列表","iconCls":"icon-camera-group","children":[],parentId:0,groupId:0}];
+            rootNode = [{"id":"1","text":"相机列表","iconCls":"icon-camera-group","children":[],parentId:0,groupId:0,state:'closed'}];
         }
         this.rootNode = rootNode;
 
         //递归添加所有的子节点
         var rootLen = this.rootNode.length;
+
+
         for(var i=0; i< rootLen; i++){
             var tmpNode = this.rootNode[i];
 
@@ -56,7 +60,87 @@ TreeObject.prototype = {
             this.addGroupData(tmpNode,dataMap);
         }
     },
-    parseGroupXML:function(groupXML){
+    findChildGroup:function(groupXML,tgroupid,groupArr){
+
+        var elements = groupXML.getElementsByTagName("RetGetCameraGroup");
+        var groups = groupXML.getElementsByTagName("CameraGroupRes");
+        var flag = false;
+
+        var temp2 =0;
+
+        var temp =0;
+        for(var j=0; j<groupArr.length; j++){
+            if(tgroupid == groupArr[j]){
+                temp = 1;
+                break;
+            }
+        }
+
+    },
+    findParentGroup:function(groupXML,Tgroupid,hasCameraGroup) {
+        var groups = groupXML.getElementsByTagName("CameraGroupRes");
+
+        for (var i = 0; i < groups.length; i++) {
+            var parentId = groups[i].getElementsByTagName("ubiParentId")[0].firstChild.nodeValue;
+            var groupId = groups[i].getElementsByTagName("ubiCameraGroupId")[0].firstChild.nodeValue;
+
+            if(Tgroupid == groupId){
+                console.info("parentId:" + parentId + " groupId:" + groupId);
+                hasCameraGroup.push(groupId);
+                if(parentId != 0 ){
+                    this.findParentGroup(groupXML,parentId,hasCameraGroup);
+                }else{
+                    return hasCameraGroup;
+                }
+                break;
+            }
+        }
+
+        return hasCameraGroup;
+
+    },
+
+    parseGroupXML:function(groupXML) {
+        this.groupXML = groupXML;
+    },
+    parseCameraGroupXML:function(cameraXmlDoc){
+        var groupXML = this.groupXML;
+
+        /////////////////////////////
+        ///相机信息///
+        var elementsC = cameraXmlDoc.getElementsByTagName("CameraRes");
+        var groupArr = [];
+        var hasCameraGroup =[];
+        for (var i = 0; i < elementsC.length; i++)
+        {
+            var groupId = elementsC[i].getElementsByTagName("ubiCameraGroupId")[0].firstChild.nodeValue;
+
+            if(i!=0){
+                if(groupArr[groupArr.length-1] == groupId){
+
+                }else{
+                    groupArr.push(groupId);
+                    hasCameraGroup = this.findParentGroup(groupXML,groupId,hasCameraGroup);
+                    console.info(groupId+"-----"+hasCameraGroup);
+                }
+            }
+        }
+
+        var groupCameraCount = [];
+        for (var i = 0; i < groupArr.length; i++){
+            var count =0;
+            for (var j = 0; j < elementsC.length; j++){
+                var groupId = elementsC[j].getElementsByTagName("ubiCameraGroupId")[0].firstChild.nodeValue;
+                if(groupArr[i] ==groupId){
+                    count = count+1;
+                }
+            }
+            groupCameraCount.push(count);
+        }
+
+
+        //////////////////////////////
+
         var elements = groupXML.getElementsByTagName("RetGetCameraGroup");
         var key = elements[0].getElementsByTagName("ret")[0].getElementsByTagName("iValue")[0].firstChild.nodeValue;
 
@@ -66,10 +150,35 @@ TreeObject.prototype = {
         }
 
         var groups = groupXML.getElementsByTagName("CameraGroupRes");
+
+
         for (var i = 0; i < groups.length; i++) {
             var parentId = groups[i].getElementsByTagName("ubiParentId")[0].firstChild.nodeValue;
             var groupId = groups[i].getElementsByTagName("ubiCameraGroupId")[0].firstChild.nodeValue;
             var groupName = groups[i].getElementsByTagName("szName")[0].firstChild.nodeValue;
+
+            for(var j = 0;j<groupArr.length;j++){
+                if(groupArr[j] ==groupId ){
+                    groupName =groupName +"("+groupCameraCount[j]+")";
+                }
+            }
+
+            var flag =0;
+            for(var j = 0;j<hasCameraGroup.length;j++){
+                if(groupId ==hasCameraGroup[j] ){
+                    flag = 1;
+                    break;
+                }else{
+
+                }
+            }
+
+            if(flag == 1){
+
+            }else{
+                continue;
+            }
+
 
             var groupNode = {
                 parentId: parentId,
@@ -89,6 +198,7 @@ TreeObject.prototype = {
             //console.info("parentId:" + parentId + " groupId:" + groupId + " groupName:" + groupName);
         }
         this.transData(groupMap);
+
     },
     parseCameraXML:function(cameraXmlDoc,treeId){
         var elements = cameraXmlDoc.getElementsByTagName("CameraRes");
@@ -117,6 +227,7 @@ TreeObject.prototype = {
         this.addCameraData(treeId,cameraMap);
     },
     addGroupData: function(tmpNode,dataMap){
+
         var groupId = tmpNode.groupId;
         var groupData = dataMap[groupId];
         if(groupData==null){
@@ -139,14 +250,17 @@ TreeObject.prototype = {
     },
 
     getRootNode: function(){
+
         return this.rootNode;
     },
 
     addNode: function(subNode){
+
         var newNode = this.createNode(subNode);
     },
 
     appendNode: function(treeId,groupId,groupData) {
+
         var groupNode = $("#" + treeId).tree('find', groupId);
         $('#' + treeId).tree('append', {
             parent:groupNode.target,
@@ -155,10 +269,12 @@ TreeObject.prototype = {
     },
 
     getNode: function(parentId){
+
         return this.findNode(parentId,this.rootNode[0]);
     },
 
     createNode: function(subNode){
+
         return subNode;
     }
 }

@@ -17,8 +17,8 @@ angular.module('app')
       function ($stateProvider,   $urlRouterProvider) {
           
           $urlRouterProvider
-              .otherwise('/access/signin');
-              //.otherwise("/monitorweb/video");
+            //  .otherwise('/access/signin');
+              .otherwise("/monitorweb/video");
 
           $stateProvider
               .state('app', {
@@ -565,7 +565,13 @@ angular.module('app')
                                   }
                               );
 
-                              return uiLoad.load( ['js/controllers/tab.js','js/controllers/tree.js','js/monitorweb/controllers/playvideo.js','js/controllers/signin.js'] );
+                              return uiLoad.load( [
+                                  'js/controllers/tab.js',
+                                  'js/controllers/tree.js',
+                                  'js/monitorweb/controllers/playvideo.js',
+                                  'js/controllers/signin.js',
+                                  'js/controllers/camerastate/camera_state.js',
+                                  'js/controllers/camerastate/camera_state_history.js'] );
                           }]
                   }
               })

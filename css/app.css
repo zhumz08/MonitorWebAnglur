@@ -4,7 +4,7 @@
 
 html {
     background-color: #f0f3f4;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 body {
@@ -14,7 +14,6 @@ body {
     line-height: 1.42857143;
     color: #58666e;
     background-color: transparent;
-    overflow: hidden;
 }
 
 *:focus {

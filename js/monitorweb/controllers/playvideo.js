@@ -118,9 +118,9 @@ app.controller('MainMenuCtrl', ['$scope', '$http', '$state', function($scope, $h
     ];
 
     $scope.videoMenu = [
-        {title:'实时视频',pic:'menu_realtime.png',path:'view/realtime/tab.html',close:true},
-        {title:'电子地图',pic:'menu_map.png',close:true},
-        {title:'历史视频调用',pic:'menu_history.png',close:true}
+        {title:'实时视频',pic:'./img/yunnan/menu/apps/menu_realtime.png',path:'view/realtime/tab.html',close:true},
+        {title:'摄像机实时状态',pic:'./img/yunnan/menu/apps/menu_camerastate.png',path:'view/camerastate/camerastate.html',close:true},
+        {title:'摄像机历史状态',pic:'./img/yunnan/menu/apps/menu_camerastate.png',path:'view/camerastate/camerastateHistory.html',close:true}
     ];
 
     /**

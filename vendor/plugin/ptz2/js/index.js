@@ -523,9 +523,7 @@ window.onbeforeunload=function()
  */
 function returnGetCarmGroupList(content) {
 	try{
-
 		window.frames["realTimeTreeFrame"].treeObj.parseGroupXML(content);
-		window.frames["realTimeTreeFrame"].initTree();
 
 		//获取摄像头组后接着获取摄像头
 		//alert(userKey);
